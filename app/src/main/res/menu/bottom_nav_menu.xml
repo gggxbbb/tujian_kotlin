@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/navigation_today"
+            android:icon="@drawable/ic_today_black_24dp"
+            android:title="@string/title_today"/>
+
+    <item
+            android:id="@+id/navigation_archive"
+            android:icon="@drawable/ic_archive_black_24dp"
+            android:title="@string/title_archive"/>
+
+</menu>

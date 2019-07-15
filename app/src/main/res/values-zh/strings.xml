@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tujian Dev</string>
+    <string name="title_home">主页</string>
+    <string name="title_dashboard">操作</string>
+    <string name="title_notifications">消息</string>
+    <string name="title_today">今日</string>
+    <string name="title_archive">归档</string>
+    <string name="sort_phone_photo">杂烩</string>
+    <string name="sort_phone_acg">插画</string>
+    <string name="sort_computer_wallpaper">电脑壁纸</string>
+</resources>

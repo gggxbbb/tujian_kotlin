@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Tujian Dev</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_today">Today</string>
+    <string name="title_archive">Archive</string>
+    <string name="sort_phone_photo">Photography</string>
+    <string name="sort_phone_acg">Anime Illustration</string>
+    <string name="sort_computer_wallpaper">Desktops Wallpapers</string>
+</resources>
