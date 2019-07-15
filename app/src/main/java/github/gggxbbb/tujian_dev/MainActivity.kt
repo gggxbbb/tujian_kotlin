@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.github.kittinunf.fuel.Fuel
 import github.gggxbbb.tujian_dev.java.PicsAdapter
 import github.gggxbbb.tujian_dev.tools.TujianPic
-import github.gggxbbb.tujian_dev.tools.TujianToady
+import github.gggxbbb.tujian_dev.tools.tujianToady
 
 class MainActivity : AppCompatActivity() {
     private lateinit var list:RecyclerView
@@ -24,11 +24,10 @@ class MainActivity : AppCompatActivity() {
         recManage = StaggeredGridLayoutManager(1,StaggeredGridLayoutManager.VERTICAL)
         list.layoutManager = recManage
 
-        Fuel.get("https://api.dpic.dev/today").responseString { request, response, result ->
-            //返回参数
-            result.fold({ d ->
+        Fuel.get("https://api.dpic.dev/today").responseString { _, _, result ->
+            result.fold({
                 val data:String = result.get()
-                for ((k,v) in TujianToady(data)) run{
+                for ((_,v) in tujianToady(data)) run{
                     datas.add(v)
                 }
                 adapter = PicsAdapter(datas,this)

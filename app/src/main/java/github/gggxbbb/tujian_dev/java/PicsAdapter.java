@@ -2,7 +2,6 @@ package github.gggxbbb.tujian_dev.java;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import github.gggxbbb.tujian_dev.R;
 import github.gggxbbb.tujian_dev.tools.TujianPic;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public class PicsAdapter extends RecyclerView.Adapter<PicsAdapter.BeautyViewHolder> {
-    /**
-     * 上下文
-     */
+
     private Context mContext;
-    /**
-     * 数据集合
-     */
+
     private List<TujianPic> data;
 
     public PicsAdapter(List<TujianPic> data, Context context) {
@@ -31,16 +27,15 @@ public class PicsAdapter extends RecyclerView.Adapter<PicsAdapter.BeautyViewHold
         this.mContext = context;
     }
 
+    @NotNull
     @Override
-    public BeautyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        //加载item 布局文件
+    public BeautyViewHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_main_item, parent, false);
         return new BeautyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(BeautyViewHolder holder, int position) {
-        //将数据设置到item上
+    public void onBindViewHolder(@NotNull BeautyViewHolder holder, int position) {
         TujianPic beauty = data.get(position);
         Glide.with(mContext).load(beauty.getLink()).into(holder.pic);
         holder.pic.setMinimumHeight(beauty.getHeight()*(holder.pic.getWidth()/beauty.getWidth()));
@@ -62,7 +57,7 @@ public class PicsAdapter extends RecyclerView.Adapter<PicsAdapter.BeautyViewHold
         ImageView pic;
         TextView title,info,content;
         LinearLayout linearLayout;
-        public BeautyViewHolder(View itemView) {
+        BeautyViewHolder(View itemView) {
             super(itemView);
             pic = itemView.findViewById(R.id.pic);
             title = itemView.findViewById(R.id.pic_title);
