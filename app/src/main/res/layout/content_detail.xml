@@ -104,28 +104,6 @@
                     </LinearLayout>
 
                     <LinearLayout
-                            android:id="@+id/show_download"
-                            android:orientation="vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="@dimen/activity_vertical_margin"
-                            android:gravity="center"
-                            tools:ignore="UseCompoundDrawables">
-
-                        <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                app:srcCompat="@drawable/ic_file_download_black_24dp"
-                                android:contentDescription="@string/action_download"/>
-
-                        <TextView
-                                android:text="@string/action_download"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/textView2"/>
-                    </LinearLayout>
-
-                    <LinearLayout
                             android:id="@+id/show_setWallpaper"
                             android:orientation="vertical"
                             android:layout_width="wrap_content"
@@ -145,6 +123,28 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/textView3"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:id="@+id/show_download"
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/activity_vertical_margin"
+                            android:gravity="center"
+                            tools:ignore="UseCompoundDrawables">
+
+                        <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:srcCompat="@drawable/ic_file_download_black_24dp"
+                                android:contentDescription="@string/action_download"/>
+
+                        <TextView
+                                android:text="@string/action_download"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView2"/>
                     </LinearLayout>
 
                 </LinearLayout>

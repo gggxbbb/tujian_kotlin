@@ -15,13 +15,16 @@
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup">
         <activity
+                android:name=".ArchiveActivity"
+                android:label="@string/title_activity_archive"
+                android:parentActivityName=".DetailActivity"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
                 android:name=".DetailActivity"
                 android:label="@string/title_activity_detail"
                 android:parentActivityName=".MainActivity"
                 android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="github.gggxbbb.tujian_dev.MainActivity"/>
         </activity>
         <activity
                 android:name=".MainActivity"

@@ -45,8 +45,9 @@ public class PicsAdapter extends RecyclerView.Adapter<PicsAdapter.BeautyViewHold
         holder.pic.setMinimumHeight(beauty.getHeight()*(holder.pic.getWidth()/beauty.getWidth()));
         holder.content.setText(beauty.getContent());
         holder.title.setText(beauty.getTitle());
-        holder.info.setText(String.format("%s %s×%s @ %s", beauty.getTNAME(),beauty.getWidth(),beauty.getHeight(),beauty.getUsername()));
+        holder.info.setText(String.format("%s %s×%s @ %s", beauty.getTNAME(mContext),beauty.getWidth(),beauty.getHeight(),beauty.getUsername()));
         holder.linearLayout.setBackgroundColor(Color.parseColor(beauty.getThemeColor()));
+        holder.pic_root.setCardBackgroundColor(Color.parseColor(beauty.getThemeColor()));
         holder.content.setTextColor(Color.parseColor(beauty.getTextColor()));
         holder.title.setTextColor(Color.parseColor(beauty.getTextColor()));
         holder.info.setTextColor(Color.parseColor(beauty.getTextColor()));
@@ -82,4 +83,10 @@ public class PicsAdapter extends RecyclerView.Adapter<PicsAdapter.BeautyViewHold
             pic_root = itemView.findViewById(R.id.pic_root);
         }
     }
+
+    public void addItem(TujianPic tujianPic){
+        data.add(tujianPic);
+        notifyItemInserted(data.size());
+    }
+
 }

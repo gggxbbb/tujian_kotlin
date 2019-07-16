@@ -1,5 +1,6 @@
 package github.gggxbbb.tujian_dev
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.MenuItem
@@ -33,7 +34,7 @@ class DetailActivity : AppCompatActivity() {
         pic_title.text = tujianPic.getTitle()
         pic_info.text = String.format(
             "%s %s×%s @ %s",
-            tujianPic.getTNAME(),
+            tujianPic.getTNAME(this),
             tujianPic.getWidth(),
             tujianPic.getHeight(),
             tujianPic.getUsername()
@@ -48,7 +49,9 @@ class DetailActivity : AppCompatActivity() {
         show_archive.setOnClickListener { view ->
             //开归档
             //TODO 完成归档
-            Toast.makeText(this, "Developing...", Toast.LENGTH_LONG).show()
+            val i: Intent = Intent(this,ArchiveActivity::class.java)
+            i.putExtra("pic",tujianPic.getString())
+            startActivity(i)
         }
         show_download.setOnClickListener { view ->
             //下载

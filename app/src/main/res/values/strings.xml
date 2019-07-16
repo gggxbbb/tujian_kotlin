@@ -15,4 +15,5 @@
     <string name="action_set_start" tools:ignore="TypographyEllipsis">Setting...</string>
     <string name="action_download_finish">Done!</string>
     <string name="action_set_finish">Done!</string>
+    <string name="title_activity_archive">ArchiveActivity</string>
 </resources>

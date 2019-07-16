@@ -2,13 +2,17 @@
 
 package github.gggxbbb.tujian_dev.tools
 
+import android.content.Context
+import github.gggxbbb.tujian_dev.R
 import org.json.JSONArray
 import org.json.JSONObject
 
 class TujianSort {
-    val photo: String = "5398f27b-a9f7-11e8-a8ea-0202761b0892"
-    val acg: String = "4ac1c07f-a9f7-11e8-a8ea-0202761b0892"
-    val wallpaper: String = "e5771003-b4ed-11e8-a8ea-0202761b0892"
+    companion object {
+        const val photo: String = "5398f27b-a9f7-11e8-a8ea-0202761b0892"
+        const val acg: String = "4ac1c07f-a9f7-11e8-a8ea-0202761b0892"
+        const val wallpaper: String = "e5771003-b4ed-11e8-a8ea-0202761b0892"
+    }
 }
 
 class TujianPic(val dataJson: JSONObject) {
@@ -32,8 +36,13 @@ class TujianPic(val dataJson: JSONObject) {
         return dataJson.getString("TID")
     }
 
-    fun getTNAME(): String {
-        return dataJson.getString("T_NAME")
+    fun getTNAME(context: Context): String {
+        return when {
+            getTID() == TujianSort.photo -> context.getString(R.string.sort_phone_photo)
+            getTID() == TujianSort.acg -> context.getString(R.string.sort_phone_acg)
+            getTID() == TujianSort.wallpaper -> context.getString(R.string.sort_computer_wallpaper)
+            else -> ""
+        }
     }
 
     fun getPID(): String {
@@ -59,18 +68,19 @@ class TujianPic(val dataJson: JSONObject) {
     fun getHeight(): Int {
         return dataJson.getInt("height")
     }
-    fun getString():String{
+
+    fun getString(): String {
         return dataJson.toString()
     }
 }
 
-fun tujianToady(dataJson: String):Map<String,TujianPic> {
+fun tujianToady(dataJson: String): Map<String, TujianPic> {
     val todayMap = mutableMapOf<String, TujianPic>()
     val todayData = JSONArray(dataJson)
     for (i in 0 until todayData.length()) {
         val dataPic = todayData.getJSONObject(i)
         val pic = TujianPic(dataPic)
-        todayMap.put(pic.getTID(),pic)
+        todayMap.put(pic.getPID(), pic)
     }
     return todayMap
 }
