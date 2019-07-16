@@ -43,6 +43,8 @@ class DetailActivity : AppCompatActivity() {
         pic_title.setTextColor(Color.parseColor(tujianPic.getTextColor()))
         pic_info.setTextColor(Color.parseColor(tujianPic.getTextColor()))
 
+        title = tujianPic.getTitle()
+
         show_archive.setOnClickListener { view ->
             //开归档
             //TODO 完成归档
