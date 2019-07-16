@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Tujian Dev</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
@@ -8,4 +8,11 @@
     <string name="sort_phone_photo">Photography</string>
     <string name="sort_phone_acg">Anime Illustration</string>
     <string name="sort_computer_wallpaper">Desktops Wallpapers</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="action_download">Download</string>
+    <string name="action_set">Set as Wallpaper</string>
+    <string name="action_download_start" tools:ignore="TypographyEllipsis">Downloading...</string>
+    <string name="action_set_start" tools:ignore="TypographyEllipsis">Setting...</string>
+    <string name="action_download_finish">Done!</string>
+    <string name="action_set_finish">Done!</string>
 </resources>

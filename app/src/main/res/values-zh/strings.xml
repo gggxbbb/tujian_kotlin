@@ -9,4 +9,11 @@
     <string name="sort_phone_photo">杂烩</string>
     <string name="sort_phone_acg">插画</string>
     <string name="sort_computer_wallpaper">电脑壁纸</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="action_download">下载</string>
+    <string name="action_set">设为壁纸</string>
+    <string name="action_download_start">下载中</string>
+    <string name="action_set_start">设置中</string>
+    <string name="action_download_finish">下载完成</string>
+    <string name="action_set_finish">设置完成</string>
 </resources>

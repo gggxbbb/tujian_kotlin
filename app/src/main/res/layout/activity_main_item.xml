@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_height="wrap_content"
               android:id="@+id/show_pic">
 
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/activity_vertical_margin">
-
-        <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/app_name"
-                android:id="@+id/pic"
-                tools:srcCompat="@drawable/ic_dashboard_black_24dp"
-                android:scaleType="centerCrop"/>
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:id="@+id/pic_root">
 
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:padding="8dp"
-                android:id="@+id/info"
-                android:alpha="0.6"
-                >
+                android:layout_height="match_parent">
 
-            <TextView
-                    android:text="@string/app_name"
+            <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/pic_title"
-                    android:textColor="@android:color/white"
-                    android:textSize="30sp"/>
+                    android:contentDescription="@string/app_name"
+                    android:id="@+id/pic"
+                    android:scaleType="fitCenter"/>
 
-            <TextView
-                    android:text="@string/app_name"
+            <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/pic_info"
-                    android:textColor="@android:color/white"
-                    android:textSize="12sp"/>
+                    android:layout_gravity="bottom"
+                    android:padding="8dp"
+                    android:id="@+id/info">
 
-            <TextView
-                    android:text="@string/app_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/pic_content"
-                    android:autoLink="all"
-                    android:textColor="@android:color/white"
-                    android:textColorLink="@color/design_default_color_primary"
-                    android:textSize="14sp"/>
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/pic_title"
+                        android:textColor="@android:color/white"
+                        android:textSize="30sp"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/pic_info"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp"/>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/pic_content"
+                        android:autoLink="all"
+                        android:textColor="@android:color/white"
+                        android:textColorLink="@color/design_default_color_primary"
+                        android:textSize="14sp"/>
+            </LinearLayout>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

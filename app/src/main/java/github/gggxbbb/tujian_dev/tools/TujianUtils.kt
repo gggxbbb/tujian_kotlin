@@ -6,9 +6,9 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 class TujianSort {
-    var photo: String = "5398f27b-a9f7-11e8-a8ea-0202761b0892"
-    var acg: String = "4ac1c07f-a9f7-11e8-a8ea-0202761b0892"
-    var wallpaper: String = "e5771003-b4ed-11e8-a8ea-0202761b0892"
+    val photo: String = "5398f27b-a9f7-11e8-a8ea-0202761b0892"
+    val acg: String = "4ac1c07f-a9f7-11e8-a8ea-0202761b0892"
+    val wallpaper: String = "e5771003-b4ed-11e8-a8ea-0202761b0892"
 }
 
 class TujianPic(val dataJson: JSONObject) {
@@ -58,6 +58,9 @@ class TujianPic(val dataJson: JSONObject) {
 
     fun getHeight(): Int {
         return dataJson.getInt("height")
+    }
+    fun getString():String{
+        return dataJson.toString()
     }
 }
 
