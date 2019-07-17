@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.github.kittinunf.fuel.Fuel
@@ -29,7 +29,7 @@ class ArchiveActivity : AppCompatActivity() {
         setContentView(R.layout.activity_archive)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
+        fab.setOnClickListener {
 
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
