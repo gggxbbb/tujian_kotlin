@@ -1,11 +1,8 @@
 package github.gggxbbb.tujian_dev
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.github.kittinunf.fuel.Fuel
 import com.google.android.material.snackbar.Snackbar
@@ -19,31 +16,22 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recManage: StaggeredGridLayoutManager
     private lateinit var adapter: PicsAdapter
     private var datas: java.util.ArrayList<TujianPic> = java.util.ArrayList()
-    private val appPermission =
-        arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-
-        }
-
-        @Suppress("DEPRECATED_IDENTITY_EQUALS")
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ) !== PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(this, appPermission, 0)
+        fab.setOnClickListener {
+            //TODO 做投稿
         }
 
         recManage = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
         main_pics.layoutManager = recManage
 
         onLoading.visibility = View.VISIBLE
+        Snackbar.make(fab, R.string.action_loading, Snackbar.LENGTH_SHORT).show()
+
         Fuel.get("https://api.dpic.dev/today").responseString { _, _, result ->
             result.fold({
                 val data: String = result.get()

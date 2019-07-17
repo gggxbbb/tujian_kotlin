@@ -44,11 +44,9 @@ class ArchiveActivity : AppCompatActivity() {
         recManage = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
         main_pics.layoutManager = recManage
 
-        onLoading.visibility = View.VISIBLE
-
         loadPics(page, tID)
 
-        class OnScroll:RecyclerView.OnScrollListener(){
+        class OnScroll : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (page != 0) {
@@ -75,8 +73,8 @@ class ArchiveActivity : AppCompatActivity() {
     }
 
     fun loadPics(page_get: Int, tID: String) {
-        onLoading.visibility = View.VISIBLE
-        Fuel.get("https://api.dpic.dev/list/?page=$page_get&size=15&sort=$tID").responseString { _, _, result ->
+        Snackbar.make(fab, R.string.action_loading, Snackbar.LENGTH_SHORT).show()
+        Fuel.get("https://api.dpic.dev/list/?page=$page_get&size=$size&sort=$tID").responseString { _, _, result ->
             result.fold({
                 val re = JSONObject(result.get())
                 val data: String = re.getJSONArray("result").toString()
@@ -88,6 +86,7 @@ class ArchiveActivity : AppCompatActivity() {
                 }
                 onLoading.visibility = View.GONE
             }, { err ->
+                page -= 1
                 Snackbar.make(fab, "${err.message}", Snackbar.LENGTH_LONG).show()
             })
         }

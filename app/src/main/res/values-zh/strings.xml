@@ -16,4 +16,9 @@
     <string name="action_set_start">设置中</string>
     <string name="action_download_finish">下载完成</string>
     <string name="action_set_finish">设置完成</string>
+    <string name="title_activity_archive">ArchiveActivity</string>
+    <string name="actoin_download_failed">下载失败</string>
+    <string name="action_set_failed">设置失败</string>
+    <string name="action_loading">加载中</string>
+    <string name="action_list_end">到底了</string>
 </resources>

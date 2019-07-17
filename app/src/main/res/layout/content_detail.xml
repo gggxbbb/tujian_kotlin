@@ -8,9 +8,11 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/activity_detail"
         tools:context=".DetailActivity">
+
     <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:id="@+id/conten_root">
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -69,6 +71,7 @@
                             android:textSize="14sp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

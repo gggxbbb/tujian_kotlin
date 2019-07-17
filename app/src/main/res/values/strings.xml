@@ -16,4 +16,8 @@
     <string name="action_download_finish">Done!</string>
     <string name="action_set_finish">Done!</string>
     <string name="title_activity_archive">ArchiveActivity</string>
+    <string name="actoin_download_failed">Failed!</string>
+    <string name="action_set_failed">Failed!</string>
+    <string name="action_loading">Loading...</string>
+    <string name="action_list_end">No more!</string>
 </resources>

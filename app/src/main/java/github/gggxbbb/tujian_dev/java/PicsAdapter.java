@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
@@ -42,20 +41,21 @@ public class PicsAdapter extends RecyclerView.Adapter<PicsAdapter.BeautyViewHold
     public void onBindViewHolder(@NotNull final BeautyViewHolder holder, int position) {
         final TujianPic beauty = data.get(position);
         Glide.with(mContext).load(beauty.getLink()).into(holder.pic);
-        holder.pic.setMinimumHeight(beauty.getHeight()*(holder.pic.getWidth()/beauty.getWidth()));
+        holder.pic.setMinimumHeight(beauty.getHeight() * (holder.pic.getWidth() / beauty.getWidth()));
         holder.content.setText(beauty.getContent());
         holder.title.setText(beauty.getTitle());
-        holder.info.setText(String.format("%s %s×%s @ %s", beauty.getTNAME(mContext),beauty.getWidth(),beauty.getHeight(),beauty.getUsername()));
+        holder.info.setText(String.format("%s %s %s×%s @ %s", beauty.getDate(), beauty.getTNAME(mContext), beauty.getWidth(), beauty.getHeight(), beauty.getUsername()));
         holder.linearLayout.setBackgroundColor(Color.parseColor(beauty.getThemeColor()));
         holder.pic_root.setCardBackgroundColor(Color.parseColor(beauty.getThemeColor()));
         holder.content.setTextColor(Color.parseColor(beauty.getTextColor()));
+        holder.content.setLinkTextColor(Color.parseColor(beauty.getTextColor()));
         holder.title.setTextColor(Color.parseColor(beauty.getTextColor()));
         holder.info.setTextColor(Color.parseColor(beauty.getTextColor()));
         holder.root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext,DetailActivity.class);
-                intent.putExtra("pic",beauty.getString());
+                Intent intent = new Intent(mContext, DetailActivity.class);
+                intent.putExtra("pic", beauty.getString());
                 mContext.startActivity(intent);
             }
         });
@@ -68,10 +68,11 @@ public class PicsAdapter extends RecyclerView.Adapter<PicsAdapter.BeautyViewHold
 
     static class BeautyViewHolder extends RecyclerView.ViewHolder {
         ImageView pic;
-        TextView title,info,content;
+        TextView title, info, content;
         LinearLayout linearLayout;
         View root;
         CardView pic_root;
+
         BeautyViewHolder(View itemView) {
             super(itemView);
             pic = itemView.findViewById(R.id.pic);
@@ -84,7 +85,7 @@ public class PicsAdapter extends RecyclerView.Adapter<PicsAdapter.BeautyViewHold
         }
     }
 
-    public void addItem(TujianPic tujianPic){
+    public void addItem(TujianPic tujianPic) {
         data.add(tujianPic);
         notifyItemInserted(data.size());
     }
