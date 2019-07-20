@@ -1,17 +1,17 @@
 package github.gggxbbb.tujian_dev
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.github.kittinunf.fuel.Fuel
+import com.google.android.material.snackbar.Snackbar
 import github.gggxbbb.tujian_dev.java.PicsAdapter
+import github.gggxbbb.tujian_dev.tools.Http
 import github.gggxbbb.tujian_dev.tools.TujianPic
 import github.gggxbbb.tujian_dev.tools.tujianToady
-
 import kotlinx.android.synthetic.main.activity_archive.*
 import kotlinx.android.synthetic.main.content_archive.*
 import org.json.JSONObject
@@ -30,7 +30,7 @@ class ArchiveActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener {
-
+            startActivity(Intent(this, UploadActivity::class.java))
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -74,22 +74,28 @@ class ArchiveActivity : AppCompatActivity() {
 
     fun loadPics(page_get: Int, tID: String) {
         Snackbar.make(fab, R.string.action_loading, Snackbar.LENGTH_SHORT).show()
-        Fuel.get("https://api.dpic.dev/list/?page=$page_get&size=$size&sort=$tID").responseString { _, _, result ->
-            result.fold({
-                val re = JSONObject(result.get())
-                val data: String = re.getJSONArray("result").toString()
-                for ((_, v) in tujianToady(data)) run {
-                    adapter.addItem(v)
+
+        Http.get("https://api.dpic.dev/list/?page=$page_get&size=$size&sort=$tID",
+            { _, response ->
+                runOnUiThread {
+                    val re = JSONObject(response.body()!!.string())
+                    val data: String = re.getJSONArray("result").toString()
+                    for ((_, v) in tujianToady(data)) run {
+                        adapter.addItem(v)
+                    }
+                    if (page_get >= re.getInt("maxpage")) {
+                        page = 0
+                    }
+                    onLoading.visibility = View.GONE
                 }
-                if (page_get >= re.getInt("maxpage")) {
-                    page = 0
+            },
+            { _, ioException ->
+                runOnUiThread {
+                    page -= 1
+                    Snackbar.make(fab, "${ioException.message}", Snackbar.LENGTH_LONG).show()
                 }
-                onLoading.visibility = View.GONE
-            }, { err ->
-                page -= 1
-                Snackbar.make(fab, "${err.message}", Snackbar.LENGTH_LONG).show()
             })
-        }
+
     }
 
 }

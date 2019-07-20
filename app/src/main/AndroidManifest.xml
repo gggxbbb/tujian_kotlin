@@ -15,6 +15,11 @@
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup">
         <activity
+                android:name=".UploadActivity"
+                android:label="@string/title_activity_upload"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
                 android:name=".ArchiveActivity"
                 android:label="@string/title_activity_archive"
                 android:parentActivityName=".DetailActivity"

@@ -8,16 +8,30 @@
     <string name="sort_phone_photo">Photography</string>
     <string name="sort_phone_acg">Anime Illustration</string>
     <string name="sort_computer_wallpaper">Desktops Wallpapers</string>
-    <string name="title_activity_detail">DetailActivity</string>
+    <string name="title_activity_detail">Detail</string>
     <string name="action_download">Download</string>
     <string name="action_set">Set as Wallpaper</string>
-    <string name="action_download_start" tools:ignore="TypographyEllipsis">Downloading...</string>
-    <string name="action_set_start" tools:ignore="TypographyEllipsis">Setting...</string>
+    <string name="action_download_start">Downloading…</string>
+    <string name="action_set_start">Setting…</string>
     <string name="action_download_finish">Done!</string>
     <string name="action_set_finish">Done!</string>
-    <string name="title_activity_archive">ArchiveActivity</string>
+    <string name="title_activity_archive">Archive</string>
     <string name="actoin_download_failed">Failed!</string>
     <string name="action_set_failed">Failed!</string>
-    <string name="action_loading">Loading...</string>
+    <string name="action_loading">Loading…</string>
     <string name="action_list_end">No more!</string>
+    <string name="title_activity_upload">Upload</string>
+    <string name="name_sort">Sort</string>
+    <string name="name_title">Title</string>
+    <string name="name_content">Content</string>
+    <string name="name_username">Username</string>
+    <string name="name_receipt">Mailbox</string>
+    <string name="name_sub">Submit</string>
+    <string name="name_upload">Upload</string>
+    <string name="name_pic_link">Image Link (direct)</string>
+    <string name="action_input_null">请输入内容</string>
+    <string name="action_upload_start">Uploading…</string>
+    <string name="action_upload_finish">Done!</string>
+    <string name="action_upload_failed">Failed!</string>
+    <string name="action_sub_finish">Done!</string>
 </resources>

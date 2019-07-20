@@ -36,7 +36,8 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/pic_title"
                         android:textColor="@android:color/white"
-                        android:textSize="30sp"/>
+                        android:textSize="30sp"
+                        />
 
                 <TextView
                         android:layout_width="match_parent"
