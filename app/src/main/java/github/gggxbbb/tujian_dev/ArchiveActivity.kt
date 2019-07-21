@@ -12,8 +12,8 @@ import github.gggxbbb.tujian_dev.java.PicsAdapter
 import github.gggxbbb.tujian_dev.tools.Http
 import github.gggxbbb.tujian_dev.tools.TujianPic
 import github.gggxbbb.tujian_dev.tools.tujianToady
-import kotlinx.android.synthetic.main.activity_archive.*
-import kotlinx.android.synthetic.main.content_archive.*
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
 import org.json.JSONObject
 
 class ArchiveActivity : AppCompatActivity() {
@@ -26,7 +26,7 @@ class ArchiveActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_archive)
+        setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener {
