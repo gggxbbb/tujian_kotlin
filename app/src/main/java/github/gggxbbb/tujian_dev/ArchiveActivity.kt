@@ -75,14 +75,12 @@ class ArchiveActivity : AppCompatActivity() {
     fun loadPics(page_get: Int, tID: String) {
         Snackbar.make(fab, R.string.action_loading, Snackbar.LENGTH_SHORT).show()
 
-        Http.get("https://api.dpic.dev/list/?page=$page_get&size=$size&sort=$tID",
+        Http.get("https://v2.api.dailypics.cn/list/?page=$page_get&size=$size&sort=$tID",
             { _, response ->
                 runOnUiThread {
                     val re = JSONObject(response.body()!!.string())
                     val data: String = re.getJSONArray("result").toString()
-                    for ((_, v) in tujianToady(data)) run {
-                        adapter.addItem(v)
-                    }
+                    for ((_, v) in tujianToady(data)) adapter.addItem(v)
                     if (page_get >= re.getInt("maxpage")) {
                         page = 0
                     }

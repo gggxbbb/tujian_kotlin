@@ -33,12 +33,10 @@ class MainActivity : AppCompatActivity() {
         onLoading.visibility = View.VISIBLE
         Snackbar.make(fab, R.string.action_loading, Snackbar.LENGTH_SHORT).show()
 
-        Http.get("https://api.dpic.dev/today",
+        Http.get("https://v2.api.dailypics.cn/today",
             { _, response ->
                 val data: String = response.body()!!.string()
-                for ((_, v) in tujianToady(data)) run {
-                    datas.add(v)
-                }
+                for ((_, v) in tujianToady(data)) datas.add(v)
                 adapter = PicsAdapter(datas, this)
                 runOnUiThread {
                     main_pics.adapter = adapter

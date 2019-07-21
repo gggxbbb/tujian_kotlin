@@ -61,7 +61,7 @@ class UploadActivity : AppCompatActivity() {
 
             if (canDo) {
                 Http.postRequestBody(
-                    "https://api.dpic.dev/tg", hashMapOf(
+                    "https://v2.api.dailypics.cn/tg", hashMapOf(
                         "title" to pic_title.text.toString(),
                         "content" to pic_content.text.toString(),
                         "url" to pic_link.text.toString(),
