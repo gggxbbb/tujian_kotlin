@@ -34,4 +34,5 @@
     <string name="action_upload_finish">Done!</string>
     <string name="action_upload_failed">Failed!</string>
     <string name="action_sub_finish">Done!</string>
+    <string name="action_wait">Please wait</string>
 </resources>

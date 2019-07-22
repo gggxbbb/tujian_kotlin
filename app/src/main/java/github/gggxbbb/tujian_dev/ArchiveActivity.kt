@@ -23,6 +23,7 @@ class ArchiveActivity : AppCompatActivity() {
     private var datas: java.util.ArrayList<TujianPic> = java.util.ArrayList()
     private var page = 1
     private val size = 15
+    private var canLoad = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,8 +52,13 @@ class ArchiveActivity : AppCompatActivity() {
                 super.onScrolled(recyclerView, dx, dy)
                 if (page != 0) {
                     if (!recyclerView.canScrollVertically(1)) {
-                        page += 1
-                        loadPics(page, tID)
+                        if (canLoad) {
+                            page += 1
+                            loadPics(page, tID)
+                            canLoad = false
+                        }else{
+                            Snackbar.make(fab,R.string.action_wait,Snackbar.LENGTH_SHORT).show()
+                        }
                     }
                 }
             }
@@ -85,12 +91,14 @@ class ArchiveActivity : AppCompatActivity() {
                         page = 0
                     }
                     onLoading.visibility = View.GONE
+                    canLoad = true
                 }
             },
             { _, ioException ->
                 runOnUiThread {
                     page -= 1
                     Snackbar.make(fab, "${ioException.message}", Snackbar.LENGTH_LONG).show()
+                    canLoad = true
                 }
             })
 

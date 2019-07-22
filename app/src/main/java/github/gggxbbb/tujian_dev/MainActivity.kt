@@ -1,5 +1,6 @@
 package github.gggxbbb.tujian_dev
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -33,22 +34,33 @@ class MainActivity : AppCompatActivity() {
         onLoading.visibility = View.VISIBLE
         Snackbar.make(fab, R.string.action_loading, Snackbar.LENGTH_SHORT).show()
 
+        val sp = getSharedPreferences("catch", Context.MODE_PRIVATE)
+
         Http.get("https://v2.api.dailypics.cn/today",
             { _, response ->
                 val data: String = response.body()!!.string()
-                for ((_, v) in tujianToady(data)) datas.add(v)
-                adapter = PicsAdapter(datas, this)
-                runOnUiThread {
-                    main_pics.adapter = adapter
-                    onLoading.visibility = View.GONE
-                }
+                loadToday(data)
+                val editor = sp.edit()
+                editor.putString("today",data)
+                editor.apply()
             },
             { _, ioException ->
                 runOnUiThread {
-                    Snackbar.make(main_pics, "${ioException.message}", Snackbar.LENGTH_LONG).show()
+                    val data = sp.getString("today",null)
+                    if (data == null) Snackbar.make(main_pics, "${ioException.message}", Snackbar.LENGTH_LONG).show()
+                    else loadToday(data)
                 }
-
             })
 
     }
+
+    private fun loadToday(data:String){
+        for ((_, v) in tujianToady(data)) datas.add(v)
+        adapter = PicsAdapter(datas, this)
+        runOnUiThread {
+            main_pics.adapter = adapter
+            onLoading.visibility = View.GONE
+        }
+    }
+
 }

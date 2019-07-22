@@ -35,4 +35,5 @@
     <string name="action_upload_finish">上传成功</string>
     <string name="action_upload_failed">上传失败</string>
     <string name="action_sub_finish">投稿成功</string>
+    <string name="action_wait">请稍等</string>
 </resources>
