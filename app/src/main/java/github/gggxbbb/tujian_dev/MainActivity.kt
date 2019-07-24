@@ -2,15 +2,14 @@ package github.gggxbbb.tujian_dev
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import github.gggxbbb.tujian_dev.java.PicsAdapter
-import github.gggxbbb.tujian_dev.tools.Http
-import github.gggxbbb.tujian_dev.tools.TujianPic
-import github.gggxbbb.tujian_dev.tools.tujianToady
+import github.gggxbbb.tujian_dev.tools.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 
@@ -21,6 +20,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        requestedOrientation = if (isPad(this)) ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE else ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
@@ -28,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, UploadActivity::class.java))
         }
 
-        recManage = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL)
+        recManage = StaggeredGridLayoutManager(getColumns(this), StaggeredGridLayoutManager.VERTICAL)
         main_pics.layoutManager = recManage
 
         onLoading.visibility = View.VISIBLE

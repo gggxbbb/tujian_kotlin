@@ -3,9 +3,11 @@
 package github.gggxbbb.tujian_dev.tools
 
 import android.content.Context
+import android.content.res.Configuration
 import github.gggxbbb.tujian_dev.R
 import org.json.JSONArray
 import org.json.JSONObject
+
 
 class TujianSort {
     companion object {
@@ -16,6 +18,7 @@ class TujianSort {
 }
 
 class TujianPic(val dataJson: JSONObject) {
+
     fun getTitle(): String {
         return dataJson.getString("p_title")
     }
@@ -83,4 +86,13 @@ fun tujianToady(dataJson: String): Map<String, TujianPic> {
         todayMap.put(pic.getPID(), pic)
     }
     return todayMap
+}
+
+fun isPad(context: Context): Boolean {
+    return context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK >= Configuration.SCREENLAYOUT_SIZE_LARGE
+}
+
+fun getColumns(context: Context):Int{
+    return if (isPad(context)) 2
+    else 1
 }

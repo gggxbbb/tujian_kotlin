@@ -3,6 +3,7 @@ package github.gggxbbb.tujian_dev
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -13,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import github.gggxbbb.tujian_dev.tools.Http
 import github.gggxbbb.tujian_dev.tools.TujianSort
+import github.gggxbbb.tujian_dev.tools.isPad
 import kotlinx.android.synthetic.main.activity_upload.*
 import kotlinx.android.synthetic.main.content_upload.*
 import org.json.JSONObject
@@ -25,6 +27,9 @@ class UploadActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        requestedOrientation = if (isPad(this)) ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE else ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
         setContentView(R.layout.activity_upload)
         setSupportActionBar(toolbar)
 

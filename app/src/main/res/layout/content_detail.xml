@@ -30,7 +30,7 @@
                         android:layout_height="wrap_content"
                         android:contentDescription="@string/app_name"
                         android:id="@+id/pic"
-                        android:scaleType="fitCenter"/>
+                        android:scaleType="centerCrop"/>
 
             </androidx.cardview.widget.CardView>
 

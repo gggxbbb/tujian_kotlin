@@ -5,6 +5,7 @@ package github.gggxbbb.tujian_dev
 import android.app.Activity
 import android.app.WallpaperManager
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
@@ -18,6 +19,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import github.gggxbbb.tujian_dev.tools.TujianPic
+import github.gggxbbb.tujian_dev.tools.isPad
 
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.content_detail.*
@@ -34,6 +36,9 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        requestedOrientation = if (isPad(this)) ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE else ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
         setContentView(R.layout.activity_detail)
         setSupportActionBar(toolbar)
 
@@ -52,6 +57,7 @@ class DetailActivity : AppCompatActivity() {
             tujianPic.getHeight(),
             tujianPic.getUsername()
         )
+        pic_root.setCardBackgroundColor(Color.parseColor(tujianPic.getThemeColor()))
         info.setBackgroundColor(Color.parseColor(tujianPic.getThemeColor()))
         pic_content.setTextColor(Color.parseColor(tujianPic.getTextColor()))
         pic_content.setLinkTextColor(Color.parseColor(tujianPic.getTextColor()))
