@@ -10,7 +10,7 @@ import org.json.JSONObject
 
 class Http {
     companion object {
-        fun get(url: String, success: (Call, Response) -> Unit, error: (Call, IOException) -> Unit) {
+        fun get(url: String, success: (Call, Response) -> Unit, error: (Call, IOException) -> Unit = {_,_ ->}) {
             val okHttpClient = OkHttpClient()
             val request = Request.Builder()
                 .url(url)
@@ -27,7 +27,7 @@ class Http {
                 }
             })
         }
-        fun upload(url :String,file:File,success: (Call, Response) -> Unit, error: (Call, IOException) -> Unit,ContentType:String="image/jpeg"){
+        fun upload(url :String,file:File,success: (Call, Response) -> Unit, error: (Call, IOException) -> Unit = {_,_ ->},ContentType:String="image/jpeg"){
             val okHttpClient = OkHttpClient()
             val mediaType = MediaType.parse(ContentType)
             val request = Request.Builder()
@@ -46,7 +46,7 @@ class Http {
                 }
             })
         }
-        fun postRequestBody(url:String, data:MutableMap<Any?,Any?>, success: (Call, Response) -> Unit, error: (Call, IOException) -> Unit){
+        fun postRequestBody(url:String, data:MutableMap<Any?,Any?>, success: (Call, Response) -> Unit, error: (Call, IOException) -> Unit = {_,_ ->}){
             val json = MediaType.parse("application/json; charset=utf-8")
             val okHttpClient = OkHttpClient()
             val requestBody = RequestBody.create(json,JSONObject(data).toString())

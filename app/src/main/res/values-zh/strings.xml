@@ -36,4 +36,6 @@
     <string name="action_upload_failed">上传失败</string>
     <string name="action_sub_finish">投稿成功</string>
     <string name="action_wait">请稍等</string>
+    <string name="title_go_update">前往升级</string>
+    <string name="title_cancel">取消</string>
 </resources>
