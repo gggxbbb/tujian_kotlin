@@ -24,6 +24,9 @@ class BridgeActivity : AppCompatActivity() {
                             val pic = JSONObject(data)
                             if (pic.has("error_code")) {
                                 info_text.setText(R.string.action_found_failes)
+                                runOnUiThread {
+                                    onLoading.visibility = View.GONE
+                                }
                             } else {
                                 val intent = Intent(this, DetailActivity::class.java)
                                 intent.putExtra("pic", data)
@@ -36,6 +39,7 @@ class BridgeActivity : AppCompatActivity() {
                         { _, ioException ->
                             runOnUiThread {
                                 info_text.text = ioException.message
+                                onLoading.visibility = View.GONE
                             }
                         })
                 }

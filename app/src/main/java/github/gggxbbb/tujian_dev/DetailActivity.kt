@@ -10,6 +10,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
@@ -18,7 +19,12 @@ import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestBuilder
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import github.gggxbbb.tujian_dev.tools.TujianPic
 import github.gggxbbb.tujian_dev.tools.getLink
@@ -52,7 +58,19 @@ class DetailActivity : AppCompatActivity() {
 
         @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
         tujianPic = TujianPic(JSONObject(intent.getStringExtra("pic")))
-        Glide.with(this).load(tujianPic.getLink()).into(pic)
+
+        Glide.with(this).load(tujianPic.getLink()).listener(object : RequestListener<Drawable>{
+            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                onLoading.visibility = View.GONE
+                info_text.text = e?.message
+                return false
+            }
+            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                onLoading.visibility = View.GONE
+                info_text.visibility = View.GONE
+                return false
+            }
+        }).into(pic)
         pic_content.text = tujianPic.getContent()
         pic_title.text = tujianPic.getTitle()
         pic_info.text = String.format(
