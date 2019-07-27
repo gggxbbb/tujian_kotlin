@@ -1,6 +1,5 @@
 package github.gggxbbb.tujian_dev
 
-
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
