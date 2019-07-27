@@ -4,6 +4,8 @@ package github.gggxbbb.tujian_dev
 
 import android.app.Activity
 import android.app.WallpaperManager
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
@@ -19,10 +21,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import github.gggxbbb.tujian_dev.tools.TujianPic
+import github.gggxbbb.tujian_dev.tools.getLink
 import github.gggxbbb.tujian_dev.tools.isPad
 
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.content_detail.*
+import kotlinx.android.synthetic.main.content_detail_info.*
+import kotlinx.android.synthetic.main.content_detail_pic.*
 import org.json.JSONObject
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
@@ -37,7 +42,8 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        requestedOrientation = if (isPad(this)) ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE else ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        requestedOrientation =
+            if (isPad(this)) ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE else ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         setContentView(R.layout.activity_detail)
         setSupportActionBar(toolbar)
@@ -88,6 +94,18 @@ class DetailActivity : AppCompatActivity() {
             //设壁纸
             Snackbar.make(conten_root, R.string.action_set_start, Snackbar.LENGTH_LONG).show()
             setPic(tujianPic, conten_root)
+        }
+        show_copy_link.setOnClickListener {
+            //复制链接
+            val cmb= getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            cmb.text = getLink(tujianPic)
+            Snackbar.make(conten_root, R.string.action_copy_finish, Snackbar.LENGTH_LONG).show()
+        }
+        show_browser.setOnClickListener {
+            //开浏览器
+            val uri = Uri.parse(getLink(tujianPic))
+            val i = Intent(Intent.ACTION_VIEW,uri)
+            startActivity(i)
         }
 
     }

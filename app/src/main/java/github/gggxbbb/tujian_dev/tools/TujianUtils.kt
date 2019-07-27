@@ -92,7 +92,11 @@ fun isPad(context: Context): Boolean {
     return context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK >= Configuration.SCREENLAYOUT_SIZE_LARGE
 }
 
-fun getColumns(context: Context):Int{
+fun getColumns(context: Context): Int {
     return if (isPad(context)) 2
     else 1
+}
+
+fun getLink(pic:TujianPic): String {
+    return "https://www.dailypics.cn/member/id/${pic.getPID()}"
 }

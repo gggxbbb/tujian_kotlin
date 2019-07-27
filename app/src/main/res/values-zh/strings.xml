@@ -38,4 +38,7 @@
     <string name="action_wait">请稍等</string>
     <string name="title_go_update">前往升级</string>
     <string name="title_cancel">取消</string>
+    <string name="title_open_in_browser">浏览器中打开</string>
+    <string name="title_copy_link">复制链接</string>
+    <string name="action_copy_finish">已复制</string>
 </resources>
