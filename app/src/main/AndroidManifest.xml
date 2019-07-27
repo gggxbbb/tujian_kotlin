@@ -14,6 +14,19 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup">
+        <activity
+                android:name=".BridgeActivity"
+                android:enabled="true"
+                android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="tujian"/>
+            </intent-filter>
+        </activity>
 
         <activity
                 android:name=".UploadActivity"
@@ -39,10 +52,8 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
-                <data android:scheme="tujian"/>
             </intent-filter>
         </activity>
     </application>

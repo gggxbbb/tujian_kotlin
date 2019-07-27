@@ -58,38 +58,6 @@ class MainActivity : AppCompatActivity() {
                 }
             })
 
-
-        val iData = intent.data
-        if (iData?.scheme.equals("tujian")) {
-            Snackbar.make(fab, R.string.action_wait, Snackbar.LENGTH_LONG).show()
-            onLoading.visibility = View.VISIBLE
-            when (iData?.host) {
-                "p" -> {
-                    Http.get("https://v2.api.dailypics.cn/member?id=${iData.path?.replace("/", "")}",
-                        { _, response ->
-                            val data: String = response.body()!!.string()
-                            val pic = JSONObject(data)
-                            if (pic.has("error_code")) {
-                                Snackbar.make(fab, R.string.action_found_failes, Snackbar.LENGTH_LONG).show()
-                            } else {
-                                val intent = Intent(this, DetailActivity::class.java)
-                                intent.putExtra("pic", data)
-                                runOnUiThread {
-                                    this.startActivity(intent)
-                                    onLoading.visibility = View.GONE
-                                }
-                            }
-                        },
-                        { _, ioException ->
-                            runOnUiThread {
-                                Snackbar.make(main_pics, "${ioException.message}", Snackbar.LENGTH_LONG).show()
-                                onLoading.visibility = View.GONE
-                            }
-                        })
-                }
-            }
-        }
-
     }
 
     private fun loadToday(data: String) {
