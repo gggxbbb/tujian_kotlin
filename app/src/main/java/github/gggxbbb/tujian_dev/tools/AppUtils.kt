@@ -23,7 +23,7 @@ fun checkForUpdate(context: Context) {
     Http.get("https://api.github.com/repos/gggxbbb/tujian_kotlin/releases",
         { _, response ->
             val data = JSONArray(response.body()!!.string()).getJSONObject(0)
-            if (ifNeedUpdate(versionName,data.getString("tag_name")) && !data.getBoolean("draft")) run {
+            if (ifNeedUpdate(versionName,data.getString("tag_name")) && !data.getBoolean("draft") && data.getString("name") != "null") run {
                 val builder: AlertDialog.Builder = AlertDialog.Builder(context)
                 builder.setTitle(data.getString("name"))
                 builder.setMessage(data.getString("body"))

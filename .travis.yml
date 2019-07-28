@@ -35,3 +35,6 @@ cache:
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
 
+notifications:
+  email:
+    - 2331490629@qq.com
