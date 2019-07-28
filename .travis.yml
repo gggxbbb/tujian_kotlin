@@ -20,6 +20,7 @@ deploy:
   provider: releases
   api_key:
     secure: HmXD+MrA7HyB7pwLO4VE4ND012Kcqgd57V/z1odJNIiRSx1tXnWduvUVzhQ+HlVopDbfeMolEiHOH/WIDMJlvCwAjo8yl/nWgx8iv6tw/15Z99DZlnpQuzJMMlCHs09FtaVTvfYMU390xA5AVJF3XIW8241SY4tw1PgZprlEHewfnU1zE1eN7WMRMffcbwcmmj1hhuY63zi/0274lMY77+zhCCk44E5ygiWgEp2wSPQozJ/2bGZPqLDqqZMuZBGadQSVRb2L46a45nPByQX9b3GwMhOwGWoZpj67avEOd/sePHVPUa44lWkYRqsqIcPHGkiURu9N9yz2qbNPR/4b3UT8VulTOSYNywJUJu+7Sd9WDhuMTnvI4vOfFfyBVuEE87g/hPFLLKke4QQYh55DFcfr+LewuuLEsLMX3FDdeDF8ot/uneCCTdVffiCodDgdb4a9r/3h/bxNecIziLQi9ydF3CB5fKwqhlVdjEaDewPk5yoPsMzL03wWGBS6BRXzmSRNPglSWE1y9STtRNBan3ZtsvUa4NhzYeWunooB8A83A3jJr5RkiNQ/fNo0p2CdsfAEqnbwTbHK/7VXkj4AmZc+lBXPPOCdHLCHPjjtKxtCj7NjrIVLR0C1s4V9oKunZMZGWZ29tNNtzWjVgmV9xZF1rkMaxz48KKKbRSvsBg0=
+  skip_cleanup: true
   file: app/build/outputs/apk/release/app-release.apk
   on:
     tags: true
