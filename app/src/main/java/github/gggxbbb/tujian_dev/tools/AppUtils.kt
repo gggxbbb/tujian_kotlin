@@ -11,7 +11,7 @@ import github.gggxbbb.tujian_dev.R
 import org.json.JSONArray
 import java.util.regex.Pattern
 
-fun checkUpdata(context: Context) {
+fun checkForUpdate(context: Context) {
     val manager = context.packageManager
     var versionName = ""
     try {
@@ -25,7 +25,7 @@ fun checkUpdata(context: Context) {
             val data = JSONArray(response.body()!!.string()).getJSONObject(0)
             if (ifNeedUpdate(versionName,data.getString("tag_name")) && !data.getBoolean("draft")) run {
                 val builder: AlertDialog.Builder = AlertDialog.Builder(context)
-                builder.setTitle(data.getString("name"))
+                builder.setTitle(data.getString("tag_name"))
                 builder.setMessage(data.getString("body"))
                 builder.setPositiveButton(R.string.title_go_update) { _, _ ->
                     val uri = Uri.parse(data.getString("html_url"))

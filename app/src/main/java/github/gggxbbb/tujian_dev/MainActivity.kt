@@ -12,7 +12,6 @@ import github.gggxbbb.tujian_dev.java.PicsAdapter
 import github.gggxbbb.tujian_dev.tools.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
     private lateinit var recManage: StaggeredGridLayoutManager
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        checkUpdata(this)
+        checkForUpdate(this)
 
         fab.setOnClickListener {
             startActivity(Intent(this, UploadActivity::class.java))
