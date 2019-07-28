@@ -1,5 +1,6 @@
 language: android
 dist: trusty
+
 android:
   components:
     - tools
@@ -8,8 +9,13 @@ android:
     - build-tools-29.0.1
     - android-29
     - extra
+
 script:
   - "./gradlew :app:assembleRelease"
+
+before_install:
+  - chmod +x gradlew
+
 deploy:
   provider: releases
   api_key:
