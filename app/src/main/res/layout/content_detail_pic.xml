@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:showIn="@layout/content_detail">
-
-    <androidx.cardview.widget.CardView
+ <androidx.constraintlayout.widget.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/activity_vertical_margin"
-            android:id="@+id/pic_root">
+            tools:showIn="@layout/content_detail">
 
         <LinearLayout
                 android:orientation="vertical"
@@ -31,14 +24,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/info_text"/>
+
         </LinearLayout>
 
-        <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/app_name"
-                android:id="@+id/pic"
-                android:scaleType="centerInside"/>
-
-    </androidx.cardview.widget.CardView>
-</LinearLayout>
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/app_name"
+            android:id="@+id/pic"
+            tools:ignore="MissingConstraints"
+            android:scaleType="fitCenter"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>

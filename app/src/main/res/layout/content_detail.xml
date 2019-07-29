@@ -12,16 +12,20 @@
     <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/conten_root">
+            android:id="@+id/content_root">
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-            <include layout="@layout/content_detail_pic"/>
+            <include
+                    layout="@layout/content_detail_pic"
+                    android:id="@+id/pic_root"/>
 
-            <include layout="@layout/content_detail_info"/>
+            <include
+                    layout="@layout/content_detail_info"
+                    android:id="@+id/info_root"/>
 
         </LinearLayout>
     </ScrollView>

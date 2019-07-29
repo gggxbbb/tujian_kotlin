@@ -9,27 +9,25 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
 import android.view.MenuItem
 import android.view.View
-import com.google.android.material.snackbar.Snackbar
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
+import com.google.android.material.snackbar.Snackbar
 import github.gggxbbb.tujian_dev.tools.TujianPic
 import github.gggxbbb.tujian_dev.tools.getLink
 import github.gggxbbb.tujian_dev.tools.isPad
-
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.content_detail.*
 import kotlinx.android.synthetic.main.content_detail_info.*
@@ -68,6 +66,11 @@ class DetailActivity : AppCompatActivity() {
             override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
                 onLoading.visibility = View.GONE
                 info_text.visibility = View.GONE
+
+                val parms:ViewGroup.LayoutParams = pic.layoutParams
+                parms.height = pic.width * tujianPic.getHeight() / tujianPic.getWidth()
+                pic.layoutParams = parms
+
                 return false
             }
         }).into(pic)
@@ -81,12 +84,11 @@ class DetailActivity : AppCompatActivity() {
             tujianPic.getHeight(),
             tujianPic.getUsername()
         )
-        pic_root.setCardBackgroundColor(Color.parseColor(tujianPic.getThemeColor()))
-        info.setBackgroundColor(Color.parseColor(tujianPic.getThemeColor()))
-        pic_content.setTextColor(Color.parseColor(tujianPic.getTextColor()))
-        pic_content.setLinkTextColor(Color.parseColor(tujianPic.getTextColor()))
-        pic_title.setTextColor(Color.parseColor(tujianPic.getTextColor()))
-        pic_info.setTextColor(Color.parseColor(tujianPic.getTextColor()))
+        info.setBackgroundColor(tujianPic.getThemeColorInt())
+        pic_content.setTextColor(tujianPic.getTextColorInt())
+        pic_content.setLinkTextColor(tujianPic.getTextColorInt())
+        pic_title.setTextColor(tujianPic.getTextColorInt())
+        pic_info.setTextColor(tujianPic.getTextColorInt())
 
         title = tujianPic.getTitle()
 
@@ -98,7 +100,7 @@ class DetailActivity : AppCompatActivity() {
         }
         show_download.setOnClickListener {
             //下载
-            Snackbar.make(conten_root, R.string.action_download_start, Snackbar.LENGTH_LONG).show()
+            Snackbar.make(content_root, R.string.action_download_start, Snackbar.LENGTH_LONG).show()
             val i = Intent(Intent.ACTION_CREATE_DOCUMENT)
             i.addCategory(Intent.CATEGORY_OPENABLE)
             i.type = "image/jpeg"
@@ -110,14 +112,14 @@ class DetailActivity : AppCompatActivity() {
         }
         show_setWallpaper.setOnClickListener {
             //设壁纸
-            Snackbar.make(conten_root, R.string.action_set_start, Snackbar.LENGTH_LONG).show()
-            setPic(tujianPic, conten_root)
+            Snackbar.make(content_root, R.string.action_set_start, Snackbar.LENGTH_LONG).show()
+            setPic(tujianPic, content_root)
         }
         show_copy_link.setOnClickListener {
             //复制链接
             val cmb= getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             cmb.text = getLink(tujianPic)
-            Snackbar.make(conten_root, R.string.action_copy_finish, Snackbar.LENGTH_LONG).show()
+            Snackbar.make(content_root, R.string.action_copy_finish, Snackbar.LENGTH_LONG).show()
         }
         show_browser.setOnClickListener {
             //开浏览器
@@ -131,7 +133,7 @@ class DetailActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == code && resultCode == Activity.RESULT_OK) {
             if (data != null) {
-                downloadPic(tujianPic, conten_root, data.data!!)
+                downloadPic(tujianPic, content_root, data.data!!)
             }
         }
         super.onActivityResult(requestCode, resultCode, data)

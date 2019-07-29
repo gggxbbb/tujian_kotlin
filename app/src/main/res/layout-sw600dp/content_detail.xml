@@ -13,12 +13,13 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:id="@+id/content_root"
             android:baselineAligned="false">
 
         <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/conten_root"
+                android:id="@+id/pic_root"
                 android:layout_weight="1">
 
             <include layout="@layout/content_detail_pic"/>
@@ -28,7 +29,8 @@
         <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:id="@+id/info_root">
 
             <include
                     layout="@layout/content_detail_info"

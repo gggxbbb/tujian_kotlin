@@ -4,6 +4,7 @@ package github.gggxbbb.tujian_dev.tools
 
 import android.content.Context
 import android.content.res.Configuration
+import android.graphics.Color
 import github.gggxbbb.tujian_dev.R
 import org.json.JSONArray
 import org.json.JSONObject
@@ -62,6 +63,14 @@ class TujianPic(val dataJson: JSONObject) {
 
     fun getTextColor(): String {
         return dataJson.getString("text_color")
+    }
+
+    fun getThemeColorInt():Int{
+        return  Color.parseColor(getThemeColor())
+    }
+
+    fun getTextColorInt():Int{
+        return  Color.parseColor(getTextColor())
     }
 
     fun getWidth(): Int {
