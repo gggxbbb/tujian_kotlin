@@ -57,7 +57,7 @@ class DetailActivity : AppCompatActivity() {
         @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
         tujianPic = TujianPic(JSONObject(intent.getStringExtra("pic")))
 
-        Glide.with(this).load(tujianPic.getLink()).listener(object : RequestListener<Drawable>{
+        Glide.with(this).load(tujianPic.getLinkHD()).listener(object : RequestListener<Drawable>{
             override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
                 onLoading.visibility = View.GONE
                 info_text.text = e?.message
@@ -67,9 +67,9 @@ class DetailActivity : AppCompatActivity() {
                 onLoading.visibility = View.GONE
                 info_text.visibility = View.GONE
 
-                val parms:ViewGroup.LayoutParams = pic.layoutParams
-                parms.height = pic.width * tujianPic.getHeight() / tujianPic.getWidth()
-                pic.layoutParams = parms
+                val params:ViewGroup.LayoutParams = pic.layoutParams
+                params.height = pic.width * tujianPic.getHeight() / tujianPic.getWidth()
+                pic.layoutParams = params
 
                 return false
             }
@@ -148,7 +148,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun setPic(tujianPic: TujianPic, view: View) {
-        Glide.with(this).asBitmap().load(tujianPic.getLink()).into(object : SimpleTarget<Bitmap>() {
+        Glide.with(this).asBitmap().load(tujianPic.getLinkHD()).into(object : SimpleTarget<Bitmap>() {
             override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                 val wallpaperManager = WallpaperManager.getInstance(this@DetailActivity)
                 try {
@@ -163,7 +163,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun downloadPic(tujianPic: TujianPic, view: View, uri: Uri) {
-        Glide.with(this).asBitmap().load(tujianPic.getLink()).into(object : SimpleTarget<Bitmap>() {
+        Glide.with(this).asBitmap().load(tujianPic.getLinkHD()).into(object : SimpleTarget<Bitmap>() {
             override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                 try {
                     val pfd: ParcelFileDescriptor? = contentResolver.openFileDescriptor(uri, "w")

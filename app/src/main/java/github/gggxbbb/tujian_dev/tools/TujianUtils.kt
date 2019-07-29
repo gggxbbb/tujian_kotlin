@@ -36,6 +36,10 @@ class TujianPic(val dataJson: JSONObject) {
         return dataJson.getString("local_url")
     }
 
+    fun getLinkHD():String{
+        return  getLink() + "?p=0"
+    }
+
     fun getTID(): String {
         return dataJson.getString("TID")
     }
