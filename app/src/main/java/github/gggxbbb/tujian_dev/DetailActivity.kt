@@ -17,6 +17,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsIntent
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -136,8 +137,9 @@ class DetailActivity : AppCompatActivity() {
         show_browser.setOnClickListener {
             //开浏览器
             val uri = Uri.parse(getLink(tujianPic))
-            val i = Intent(Intent.ACTION_VIEW, uri)
-            startActivity(i)
+            val builder = CustomTabsIntent.Builder()
+            val tab = builder.build()
+            tab.launchUrl(this,uri)
         }
         show_share.setOnClickListener {
             //分享
