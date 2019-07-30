@@ -57,17 +57,29 @@ class DetailActivity : AppCompatActivity() {
         @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
         tujianPic = TujianPic(JSONObject(intent.getStringExtra("pic")))
 
-        Glide.with(this).load(tujianPic.getLinkHD()).listener(object : RequestListener<Drawable>{
-            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+        Glide.with(this).load(tujianPic.getLinkHD()).listener(object : RequestListener<Drawable> {
+            override fun onLoadFailed(
+                e: GlideException?,
+                model: Any?,
+                target: Target<Drawable>?,
+                isFirstResource: Boolean
+            ): Boolean {
                 onLoading.visibility = View.GONE
                 info_text.text = e?.message
                 return false
             }
-            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+
+            override fun onResourceReady(
+                resource: Drawable?,
+                model: Any?,
+                target: Target<Drawable>?,
+                dataSource: DataSource?,
+                isFirstResource: Boolean
+            ): Boolean {
                 onLoading.visibility = View.GONE
                 info_text.visibility = View.GONE
 
-                val params:ViewGroup.LayoutParams = pic.layoutParams
+                val params: ViewGroup.LayoutParams = pic.layoutParams
                 params.height = pic.width * tujianPic.getHeight() / tujianPic.getWidth()
                 pic.layoutParams = params
 
@@ -117,17 +129,23 @@ class DetailActivity : AppCompatActivity() {
         }
         show_copy_link.setOnClickListener {
             //复制链接
-            val cmb= getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val cmb = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             cmb.text = getLink(tujianPic)
             Snackbar.make(content_root, R.string.action_copy_finish, Snackbar.LENGTH_LONG).show()
         }
         show_browser.setOnClickListener {
             //开浏览器
             val uri = Uri.parse(getLink(tujianPic))
-            val i = Intent(Intent.ACTION_VIEW,uri)
+            val i = Intent(Intent.ACTION_VIEW, uri)
             startActivity(i)
         }
-
+        show_share.setOnClickListener {
+            //分享
+            val i = Intent(Intent.ACTION_SEND)
+            i.putExtra(Intent.EXTRA_TEXT, "《${tujianPic.getTitle()}》\n${tujianPic.getContent()}\n${getLink(tujianPic)}")
+            i.type = "text/plain"
+            startActivity(Intent.createChooser(i, getString(R.string.title_share)))
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -167,10 +185,10 @@ class DetailActivity : AppCompatActivity() {
             override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                 try {
                     val pfd: ParcelFileDescriptor? = contentResolver.openFileDescriptor(uri, "w")
-                    val fileOutputStream = FileOutputStream(pfd?.fileDescriptor)
+                    val fileOutputStream = FileOutputStream(pfd?.fileDescriptor!!)
                     resource.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
                     fileOutputStream.close()
-                    pfd?.close()
+                    pfd.close()
                     Snackbar.make(view, R.string.action_download_finish, Snackbar.LENGTH_LONG).show()
                 } catch (e: FileNotFoundException) {
                     e.printStackTrace()

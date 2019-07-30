@@ -18,7 +18,9 @@
         <activity
                 android:name=".BridgeActivity"
                 android:enabled="true"
-                android:exported="true">
+                android:exported="true"
+                android:launchMode="singleTop"
+                android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
 

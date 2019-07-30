@@ -117,6 +117,29 @@
         </LinearLayout>
 
         <LinearLayout
+                android:id="@+id/show_share"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:gravity="center|start"
+                tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_share_black_24dp"
+                    android:contentDescription="@string/title_archive"
+                    android:baselineAlignBottom="false"
+                    android:layout_margin="8dp"/>
+
+            <TextView
+                    android:text="@string/title_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

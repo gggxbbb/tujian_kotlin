@@ -41,4 +41,6 @@
     <string name="title_copy_link">Copy Link</string>
     <string name="action_copy_finish">Done!</string>
     <string name="action_found_failes">No such picture</string>
+    <string name="title_share">Share</string>
+    <string name="title_share_img">Share the picture</string>
 </resources>

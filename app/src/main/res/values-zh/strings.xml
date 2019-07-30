@@ -42,4 +42,6 @@
     <string name="title_copy_link">复制链接</string>
     <string name="action_copy_finish">已复制</string>
     <string name="action_found_failes">找不到这张图片</string>
+    <string name="title_share">分享</string>
+    <string name="title_share_img">分享图片</string>
 </resources>
