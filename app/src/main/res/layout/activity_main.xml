@@ -29,6 +29,7 @@
             android:layout_margin="@dimen/fab_margin"
             app:srcCompat="@drawable/ic_add_white_24dp"
             android:backgroundTint="@android:color/black"
-            app:backgroundTint="@android:color/black"/>
+            app:backgroundTint="@android:color/black"
+            android:visibility="gone"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
