@@ -194,10 +194,10 @@ class DetailActivity : AppCompatActivity() {
                     Snackbar.make(view, R.string.action_download_finish, Snackbar.LENGTH_LONG).show()
                 } catch (e: FileNotFoundException) {
                     e.printStackTrace()
-                    Snackbar.make(view, R.string.actoin_download_failed, Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(view, R.string.action_download_failed, Snackbar.LENGTH_LONG).show()
                 } catch (e: IOException) {
                     e.printStackTrace()
-                    Snackbar.make(view, R.string.actoin_download_failed, Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(view, R.string.action_download_failed, Snackbar.LENGTH_LONG).show()
                 }
             }
         })

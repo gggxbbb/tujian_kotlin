@@ -6,9 +6,9 @@
     <string name="title_notifications">消息</string>
     <string name="title_today">今日</string>
     <string name="title_archive">归档</string>
-    <string name="sort_phone_photo">杂烩</string>
+    <string name="sort_phone_photo">摄影</string>
     <string name="sort_phone_acg">插画</string>
-    <string name="sort_computer_wallpaper">电脑壁纸</string>
+    <string name="sort_computer_wallpaper">桌面</string>
     <string name="title_activity_detail">详情</string>
     <string name="action_download">下载</string>
     <string name="action_set">设为壁纸</string>
@@ -17,7 +17,7 @@
     <string name="action_download_finish">下载完成</string>
     <string name="action_set_finish">设置完成</string>
     <string name="title_activity_archive">归档</string>
-    <string name="actoin_download_failed">下载失败</string>
+    <string name="action_download_failed">下载失败</string>
     <string name="action_set_failed">设置失败</string>
     <string name="action_loading">加载中</string>
     <string name="action_list_end">到底了</string>
