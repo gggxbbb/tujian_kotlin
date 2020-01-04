@@ -45,8 +45,8 @@ fun checkForUpdate(context: Context) {
         })
 }
 
-fun ifNeedUpdate(localVersion:String,remoteViersion:String):Boolean{
-    return keepDigital(remoteViersion)> keepDigital(localVersion)
+fun ifNeedUpdate(localVersion:String,remoteVersion:String):Boolean{
+    return keepDigital(remoteVersion)> keepDigital(localVersion)
 }
 
 fun keepDigital(oldString: String): Int {
