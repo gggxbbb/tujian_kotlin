@@ -1,188 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background"
+        android:orientation="vertical"
         tools:showIn="@layout/content_detail">
 
     <LinearLayout
-            android:orientation="vertical"
+            android:id="@+id/info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:padding="8dp"
-            android:id="@+id/info">
+            android:orientation="vertical"
+            android:padding="8dp">
 
         <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/pic_title"
-                android:textColor="@android:color/white"
-                android:textSize="30sp"
-                android:textIsSelectable="true"/>
-
-        <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textIsSelectable="true"
+                android:textSize="30sp" />
+
+        <TextView
                 android:id="@+id/pic_info"
-                android:textColor="@android:color/white"
-                android:textSize="12sp"
-                android:textIsSelectable="true"/>
-
-        <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textIsSelectable="true"
+                android:textSize="12sp" />
+
+        <TextView
                 android:id="@+id/pic_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:autoLink="all"
                 android:textColor="@android:color/white"
                 android:textColorLink="@color/design_default_color_primary"
-                android:textSize="14sp"
-                android:textIsSelectable="true"/>
+                android:textIsSelectable="true"
+                android:textSize="14sp" />
     </LinearLayout>
 
     <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
         <LinearLayout
                 android:id="@+id/show_archive"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:gravity="center|start"
+                android:orientation="horizontal"
                 tools:ignore="UseCompoundDrawables">
 
             <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_archive_black_24dp"
-                    android:contentDescription="@string/title_archive"
+                    android:layout_margin="8dp"
                     android:baselineAlignBottom="false"
-                    android:layout_margin="8dp"/>
+                    android:contentDescription="@string/title_archive"
+                    app:srcCompat="@drawable/ic_archive_black_24dp" />
 
             <TextView
-                    android:text="@string/title_archive"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_archive"
+                    android:textColor="@color/text_color" />
         </LinearLayout>
 
         <LinearLayout
                 android:id="@+id/show_setWallpaper"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:gravity="center|start"
+                android:orientation="horizontal"
                 tools:ignore="UseCompoundDrawables">
 
             <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_wallpaper_black_24dp"
+                    android:layout_margin="8dp"
                     android:contentDescription="@string/action_set"
-                    android:layout_margin="8dp"/>
+                    app:srcCompat="@drawable/ic_wallpaper_black_24dp" />
 
             <TextView
-                    android:text="@string/action_set"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:text="@string/action_set"
+                    android:textColor="@color/text_color"/>
         </LinearLayout>
 
         <LinearLayout
                 android:id="@+id/show_download"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:gravity="center|start"
+                android:orientation="horizontal"
                 tools:ignore="UseCompoundDrawables">
 
             <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_file_download_black_24dp"
+                    android:layout_margin="8dp"
                     android:contentDescription="@string/action_download"
-                    android:layout_margin="8dp"/>
+                    app:srcCompat="@drawable/ic_file_download_black_24dp" />
 
             <TextView
-                    android:text="@string/action_download"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:text="@string/action_download"
+                    android:textColor="@color/text_color"/>
         </LinearLayout>
 
         <LinearLayout
                 android:id="@+id/show_share"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:gravity="center|start"
+                android:orientation="horizontal"
                 tools:ignore="UseCompoundDrawables">
 
             <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_share_black_24dp"
-                    android:contentDescription="@string/title_archive"
+                    android:layout_margin="8dp"
                     android:baselineAlignBottom="false"
-                    android:layout_margin="8dp"/>
+                    android:contentDescription="@string/title_archive"
+                    app:srcCompat="@drawable/ic_share_black_24dp" />
 
             <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="@string/title_share"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/text_color"/>
         </LinearLayout>
 
         <LinearLayout
-                android:orientation="horizontal"
+                android:id="@+id/show_copy_link"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:gravity="center|start"
-                tools:ignore="UseCompoundDrawables"
-                android:id="@+id/show_copy_link">
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
 
             <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_insert_link_black_24dp"
-                    android:contentDescription="@string/title_archive"
+                    android:layout_margin="8dp"
                     android:baselineAlignBottom="false"
-                    android:layout_margin="8dp"/>
+                    android:contentDescription="@string/title_archive"
+                    app:srcCompat="@drawable/ic_insert_link_black_24dp" />
 
             <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="@string/title_copy_link"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/text_color"/>
         </LinearLayout>
 
         <LinearLayout
-                android:orientation="horizontal"
+                android:id="@+id/show_browser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:gravity="center|start"
-                tools:ignore="UseCompoundDrawables"
-                android:id="@+id/show_browser">
+                android:orientation="horizontal"
+                tools:ignore="UseCompoundDrawables">
 
             <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_open_in_browser_black_24dp"
-                    android:contentDescription="@string/title_archive"
+                    android:layout_margin="8dp"
                     android:baselineAlignBottom="false"
-                    android:layout_margin="8dp"/>
+                    android:contentDescription="@string/title_archive"
+                    app:srcCompat="@drawable/ic_open_in_browser_black_24dp" />
 
             <TextView
-                    android:text="@string/title_open_in_browser"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_open_in_browser"
+                    android:textColor="@color/text_color"/>
         </LinearLayout>
 
     </LinearLayout>
