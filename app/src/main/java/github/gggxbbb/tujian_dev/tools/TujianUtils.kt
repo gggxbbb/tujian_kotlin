@@ -5,13 +5,11 @@ package github.gggxbbb.tujian_dev.tools
 import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
-import github.gggxbbb.tujian_dev.R
 import org.json.JSONArray
 import org.json.JSONObject
-import java.lang.NullPointerException
 
 
-class TujianSort(val TID:String,val TNAME:String) {}
+class TujianSort(val TID:String,val TNAME:String)
 
 val TujianSortMap=HashMap<String,TujianSort>()
 

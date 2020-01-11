@@ -23,7 +23,8 @@
                 android:id="@+id/info_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/action_loading" />
+                android:text="@string/action_loading"
+                android:textColor="@color/text_color" />
 
     </LinearLayout>
 

@@ -7,6 +7,8 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Looper
 import android.util.Log
+import android.widget.TextView
+import com.zzhoujay.richtext.RichText
 import github.gggxbbb.tujian_dev.R
 import org.json.JSONArray
 import java.util.regex.Pattern
@@ -32,10 +34,13 @@ fun checkForUpdate(context: Context) {
                     val i = Intent(Intent.ACTION_VIEW, uri)
                     context.startActivity(i)
                 }
-                builder.setNeutralButton(R.string.action_download) {_,_->
-                    val uri = Uri.parse(data.getJSONArray("assets").getJSONObject(0).getString("browser_download_url"))
-                    val i = Intent(Intent.ACTION_VIEW, uri)
-                    context.startActivity(i)
+                if (data.getJSONArray("assets").length() > 0) {
+                    builder.setNeutralButton(R.string.action_download) { _, _ ->
+                        val uri =
+                            Uri.parse(data.getJSONArray("assets").getJSONObject(0).getString("browser_download_url"))
+                        val i = Intent(Intent.ACTION_VIEW, uri)
+                        context.startActivity(i)
+                    }
                 }
                 builder.setNegativeButton(R.string.title_cancel, null)
                 Looper.prepare()
