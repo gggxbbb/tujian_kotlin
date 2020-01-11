@@ -7,8 +7,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Looper
 import android.util.Log
-import android.widget.TextView
-import com.zzhoujay.richtext.RichText
 import github.gggxbbb.tujian_dev.R
 import org.json.JSONArray
 import java.util.regex.Pattern
