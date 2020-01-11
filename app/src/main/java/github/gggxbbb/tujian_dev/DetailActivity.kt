@@ -26,6 +26,7 @@ import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.snackbar.Snackbar
+import com.zzhoujay.richtext.RichText
 import github.gggxbbb.tujian_dev.tools.TujianPic
 import github.gggxbbb.tujian_dev.tools.getLink
 import github.gggxbbb.tujian_dev.tools.isPad
@@ -87,12 +88,13 @@ class DetailActivity : AppCompatActivity() {
                 return false
             }
         }).into(pic)
-        pic_content.text = tujianPic.getContent()
+        //pic_content.text = tujianPic.getContent()
+        RichText.fromMarkdown(tujianPic.getContent()).into(pic_content)
         pic_title.text = tujianPic.getTitle()
         pic_info.text = String.format(
             "%s %s %s×%s @ %s",
             tujianPic.getDate(),
-            tujianPic.getTNAME(this),
+            tujianPic.getTNAME(),
             tujianPic.getWidth(),
             tujianPic.getHeight(),
             tujianPic.getUsername()
@@ -119,7 +121,7 @@ class DetailActivity : AppCompatActivity() {
             i.type = "image/jpeg"
             i.putExtra(
                 Intent.EXTRA_TITLE,
-                "${tujianPic.getDate()}-${tujianPic.getTNAME(this)}_${tujianPic.getTitle()}_${tujianPic.getPID()}.${tujianPic.getUsername()}.jpeg"
+                "${tujianPic.getDate()}-${tujianPic.getTNAME()}_${tujianPic.getTitle()}_${tujianPic.getPID()}.${tujianPic.getUsername()}.jpeg"
             )
             startActivityForResult(i, code)
         }

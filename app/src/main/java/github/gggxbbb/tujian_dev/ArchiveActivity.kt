@@ -32,15 +32,15 @@ class ArchiveActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener {
-            startActivity(Intent(this, UploadActivity::class.java))
-        }
+        //fab.setOnClickListener {
+            //startActivity(Intent(this, UploadActivity::class.java))
+        //}
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
         val tujianPic = TujianPic(JSONObject(intent.getStringExtra("pic")))
         val tID = tujianPic.getTID()
-        val tNAME = tujianPic.getTNAME(this)
+        val tNAME = tujianPic.getTNAME()
 
         title = tNAME
 

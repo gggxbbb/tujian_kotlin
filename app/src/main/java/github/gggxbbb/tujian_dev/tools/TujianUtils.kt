@@ -8,24 +8,24 @@ import android.graphics.Color
 import github.gggxbbb.tujian_dev.R
 import org.json.JSONArray
 import org.json.JSONObject
+import java.lang.NullPointerException
 
 
-class TujianSort {
-    companion object {
-        const val photo: String = "5398f27b-a9f7-11e8-a8ea-0202761b0892"
-        const val acg: String = "4ac1c07f-a9f7-11e8-a8ea-0202761b0892"
-        const val wallpaper: String = "e5771003-b4ed-11e8-a8ea-0202761b0892"
-    }
-}
+class TujianSort(val TID:String,val TNAME:String) {}
 
-class TujianPic(val dataJson: JSONObject) {
+val TujianSortMap=HashMap<String,TujianSort>()
+
+class TujianPic(private val dataJson: JSONObject) {
+
+    private val pContent: String =
+        Regex("(?!<= {2})\n").replace(dataJson.getString("p_content"), "  \n")
 
     fun getTitle(): String {
         return dataJson.getString("p_title")
     }
 
     fun getContent(): String {
-        return dataJson.getString("p_content")
+        return pContent
     }
 
     fun getUsername(): String {
@@ -36,20 +36,24 @@ class TujianPic(val dataJson: JSONObject) {
         return dataJson.getString("local_url")
     }
 
-    fun getLinkHD():String{
-        return  getLink() + "?p=0"
+    fun getLinkHD(): String {
+        return getLink() + "?p=0"
     }
 
     fun getTID(): String {
         return dataJson.getString("TID")
     }
 
-    fun getTNAME(context: Context): String {
-        return when {
-            getTID() == TujianSort.photo -> context.getString(R.string.sort_phone_photo)
-            getTID() == TujianSort.acg -> context.getString(R.string.sort_phone_acg)
-            getTID() == TujianSort.wallpaper -> context.getString(R.string.sort_computer_wallpaper)
-            else -> ""
+    fun getTNAME(): String {
+        return if (dataJson.has(("T_NAME"))){
+            TujianSortMap[getTID()] = TujianSort(getTID(),dataJson.getString("T_NAME"))
+            dataJson.getString("T_NAME")
+        }else{
+            try {
+                TujianSortMap[getTID()]!!.TNAME
+            }catch (e:Exception){
+                ""
+            }
         }
     }
 
@@ -69,12 +73,12 @@ class TujianPic(val dataJson: JSONObject) {
         return dataJson.getString("text_color")
     }
 
-    fun getThemeColorInt():Int{
-        return  Color.parseColor(getThemeColor())
+    fun getThemeColorInt(): Int {
+        return Color.parseColor(getThemeColor())
     }
 
-    fun getTextColorInt():Int{
-        return  Color.parseColor(getTextColor())
+    fun getTextColorInt(): Int {
+        return Color.parseColor(getTextColor())
     }
 
     fun getWidth(): Int {
@@ -96,7 +100,7 @@ fun tujianToady(dataJson: String): Map<String, TujianPic> {
     for (i in 0 until todayData.length()) {
         val dataPic = todayData.getJSONObject(i)
         val pic = TujianPic(dataPic)
-        todayMap.put(pic.getPID(), pic)
+        todayMap[pic.getPID()] = pic
     }
     return todayMap
 }
@@ -110,6 +114,6 @@ fun getColumns(context: Context): Int {
     else 1
 }
 
-fun getLink(pic:TujianPic): String {
+fun getLink(pic: TujianPic): String {
     return "https://www.dailypics.cn/member/id/${pic.getPID()}"
 }

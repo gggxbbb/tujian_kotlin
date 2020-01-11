@@ -49,12 +49,12 @@ fun ifNeedUpdate(localVersion:String,remoteVersion:String):Boolean{
     return keepDigital(remoteVersion)> keepDigital(localVersion)
 }
 
-fun keepDigital(oldString: String): Int {
+fun keepDigital(oldString: String): Long {
     val newString = StringBuffer()
     val matcher = Pattern.compile("\\d").matcher(oldString)
     while (matcher.find()) {
         newString.append(matcher.group())
     }
     Log.d("debug",newString.toString())
-    return newString.toString().toInt()
+    return newString.toString().toLong()
 }

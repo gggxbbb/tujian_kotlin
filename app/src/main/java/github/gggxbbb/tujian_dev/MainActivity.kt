@@ -29,9 +29,9 @@ class MainActivity : AppCompatActivity() {
 
         checkForUpdate(this)
 
-        fab.setOnClickListener {
-            startActivity(Intent(this, UploadActivity::class.java))
-        }
+        //fab.setOnClickListener {
+            //startActivity(Intent(this, UploadActivity::class.java))
+        //}
 
         recManage = StaggeredGridLayoutManager(getColumns(this), StaggeredGridLayoutManager.VERTICAL)
         main_pics.layoutManager = recManage

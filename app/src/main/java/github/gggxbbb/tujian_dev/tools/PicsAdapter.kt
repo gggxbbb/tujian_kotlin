@@ -17,6 +17,7 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.zzhoujay.richtext.RichText
 import github.gggxbbb.tujian_dev.DetailActivity
 import github.gggxbbb.tujian_dev.R
 import github.gggxbbb.tujian_dev.tools.PicsAdapter.TujianViewHolder
@@ -32,8 +33,8 @@ class PicsAdapter(
     }
 
     override fun onBindViewHolder(holder: TujianViewHolder, position: Int) {
-        val beauty = data[position]
-        Glide.with(mContext).load(beauty.getLink()).listener(object : RequestListener<Drawable?> {
+        val tujianPic = data[position]
+        Glide.with(mContext).load(tujianPic.getLink()).listener(object : RequestListener<Drawable?> {
             override fun onLoadFailed(
                 e: GlideException?,
                 model: Any,
@@ -54,25 +55,26 @@ class PicsAdapter(
                 return false
             }
         }).into(holder.pic)
-        holder.pic.minimumHeight = beauty.getHeight() * (holder.pic.width / beauty.getWidth())
-        holder.content.text = beauty.getContent()
-        holder.title.text = beauty.getTitle()
-        holder.info.text = String.format(
+        holder.pic.minimumHeight = tujianPic.getHeight() * (holder.pic.width / tujianPic.getWidth())
+        RichText.fromMarkdown(tujianPic.getContent()).into(holder.content)
+        //holder.content.text = tujianPic.getContent()
+        holder.title.text = tujianPic.getTitle()
+        /*holder.info.text = String.format(
             "%s %s %s×%s @ %s",
-            beauty.getDate(),
-            beauty.getTNAME(mContext),
-            beauty.getWidth(),
-            beauty.getHeight(),
-            beauty.getUsername()
-        )
-        holder.linearLayout.setBackgroundColor(Color.parseColor(beauty.getThemeColor()))
-        holder.content.setTextColor(Color.parseColor(beauty.getTextColor()))
-        holder.content.setLinkTextColor(Color.parseColor(beauty.getTextColor()))
-        holder.title.setTextColor(Color.parseColor(beauty.getTextColor()))
-        holder.info.setTextColor(Color.parseColor(beauty.getTextColor()))
+            tujianPic.getDate(),
+            tujianPic.getTNAME(),
+            tujianPic.getWidth(),
+            tujianPic.getHeight(),
+            tujianPic.getUsername()
+        )*/
+        holder.linearLayout.setBackgroundColor(Color.parseColor(tujianPic.getThemeColor()))
+        /*holder.content.setTextColor(Color.parseColor(tujianPic.getTextColor()))
+        holder.content.setLinkTextColor(Color.parseColor(tujianPic.getTextColor()))*/
+        holder.title.setTextColor(Color.parseColor(tujianPic.getTextColor()))
+        /*holder.info.setTextColor(Color.parseColor(tujianPic.getTextColor()))*/
         holder.root.setOnClickListener {
             val intent = Intent(mContext, DetailActivity::class.java)
-            intent.putExtra("pic", beauty.getString())
+            intent.putExtra("pic", tujianPic.getString())
             mContext.startActivity(intent)
         }
     }

@@ -34,35 +34,38 @@
             android:scaleType="centerCrop"/>
 
     <LinearLayout
-            android:orientation="vertical"
+            android:id="@+id/info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            android:alpha="0.8"
+            android:orientation="vertical"
             android:padding="8dp"
-            android:id="@+id/info"
-            android:alpha="0.8">
+            android:visibility="visible">
 
         <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/pic_title"
-                android:textColor="@android:color/white"
-                android:textSize="30sp"/>
-
-        <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="30sp" />
+
+        <TextView
                 android:id="@+id/pic_info"
-                android:textColor="@android:color/white"
-                android:textSize="12sp"/>
-
-        <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:visibility="gone" />
+
+        <TextView
                 android:id="@+id/pic_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:autoLink="all"
                 android:textColor="@android:color/white"
                 android:textColorLink="@color/design_default_color_primary"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:visibility="gone" />
     </LinearLayout>
 </FrameLayout>
