@@ -11,8 +11,8 @@ android {
         applicationId "github.gggxbbb.tujian_dev"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 8
-        versionName "1.0.4.3"
+        versionCode 9
+        versionName "1.4.3.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
