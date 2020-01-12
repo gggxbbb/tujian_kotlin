@@ -17,6 +17,15 @@
             android:padding="8dp">
 
         <TextView
+                android:id="@+id/pic_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background"
+                android:textColor="@color/text_color"
+                android:textIsSelectable="true"
+                android:textSize="12sp" />
+
+        <TextView
                 android:id="@+id/pic_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -26,22 +35,13 @@
                 android:textSize="30sp" />
 
         <TextView
-                android:id="@+id/pic_info"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text_color"
-                android:background="@color/background"
-                android:textIsSelectable="true"
-                android:textSize="12sp" />
-
-        <TextView
                 android:id="@+id/pic_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autoLink="all"
-                android:textColor="@color/text_color"
                 android:background="@color/background"
-                android:textColorLink="@color/design_default_color_primary"
+                android:textColor="@color/text_color"
+                android:textColorLink="@color/text_color"
                 android:textIsSelectable="true"
                 android:textSize="14sp" />
     </LinearLayout>
