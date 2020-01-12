@@ -20,7 +20,7 @@ class BridgeActivity : AppCompatActivity() {
                 "p" -> {
                     Http.get("https://v2.api.dailypics.cn/member?id=${iData.path?.replace("/", "")}",
                         { _, response ->
-                            val data: String = response.body()!!.string()
+                            val data: String = response.body!!.string()
                             val pic = JSONObject(data)
                             if (pic.has("error_code")) {
                                 info_text.setText(R.string.action_found_failes)

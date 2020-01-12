@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         Http.get("https://v2.api.dailypics.cn/today",
             { _, response ->
-                val data: String = response.body()!!.string()
+                val data: String = response.body!!.string()
                 loadToday(data)
                 val editor = sp.edit()
                 editor.putString("today", data)

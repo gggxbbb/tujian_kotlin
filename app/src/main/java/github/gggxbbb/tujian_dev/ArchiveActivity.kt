@@ -86,7 +86,7 @@ class ArchiveActivity : AppCompatActivity() {
         Http.get("https://v2.api.dailypics.cn/list/?page=$page_get&size=$size&sort=$tID",
             { _, response ->
                 runOnUiThread {
-                    val re = JSONObject(response.body()!!.string())
+                    val re = JSONObject(response.body!!.string())
                     val data: String = re.getJSONArray("result").toString()
                     for ((_, v) in tujianToady(data)) adapter.addItem(v)
                     if (page_get >= re.getInt("maxpage")) {

@@ -1,10 +1,13 @@
 package github.gggxbbb.tujian_dev.tools
 
 import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import java.io.File
 import java.io.IOException
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 
 
@@ -28,11 +31,11 @@ class Http {
             })
         }
         fun upload(url :String,file:File,success: (Call, Response) -> Unit, error: (Call, IOException) -> Unit = {_,_ ->},ContentType:String="image/jpeg"){
-            val mediaType = MediaType.parse(ContentType)
+            val mediaType = ContentType.toMediaTypeOrNull()
             val request = Request.Builder()
                 .url(url)
                 .header("Content-Type",ContentType)
-                .post(RequestBody.create(mediaType, file))
+                .post(file.asRequestBody(mediaType))
                 .build()
             val call = okHttpClient.newCall(request)
             call.enqueue(object : Callback {
@@ -46,8 +49,8 @@ class Http {
             })
         }
         fun postRequestBody(url:String, data:MutableMap<Any?,Any?>, success: (Call, Response) -> Unit, error: (Call, IOException) -> Unit = {_,_ ->}){
-            val json = MediaType.parse("application/json; charset=utf-8")
-            val requestBody = RequestBody.create(json,JSONObject(data).toString())
+            val json = "application/json; charset=utf-8".toMediaTypeOrNull()
+            val requestBody = JSONObject(data).toString().toRequestBody(json)
             val request = Request.Builder()
                 .url(url)
                 .post(requestBody)
