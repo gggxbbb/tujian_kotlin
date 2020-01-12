@@ -99,11 +99,11 @@ class DetailActivity : AppCompatActivity() {
             tujianPic.getHeight(),
             tujianPic.getUsername()
         )
-        info.setBackgroundColor(tujianPic.getThemeColorInt())
-        pic_content.setTextColor(tujianPic.getTextColorInt())
-        pic_content.setLinkTextColor(tujianPic.getTextColorInt())
-        pic_title.setTextColor(tujianPic.getTextColorInt())
-        pic_info.setTextColor(tujianPic.getTextColorInt())
+        //info.setBackgroundColor(tujianPic.getThemeColorInt())
+        //pic_content.setTextColor(tujianPic.getTextColorInt())
+        //pic_content.setLinkTextColor(tujianPic.getTextColorInt())
+        //pic_title.setTextColor(tujianPic.getTextColorInt())
+        //pic_info.setTextColor(tujianPic.getTextColorInt())
 
         title = tujianPic.getTitle()
 
