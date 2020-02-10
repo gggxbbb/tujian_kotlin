@@ -1,40 +1,36 @@
 language: android
 dist: trusty
-
 android:
   components:
-    - tools
-    - platform-tools
-    - tools
-    - build-tools-29.0.3
-    - android-29
-    - extra
-
+  - tools
+  - platform-tools
+  - tools
+  - build-tools-29.0.3
+  - android-29
+  - extra
 script:
   - "./gradlew :app:assembleRelease"
-
 before_install:
+  - openssl aes-256-cbc -K $encrypted_61eba3fac051_key -iv $encrypted_61eba3fac051_iv
+    -in Gadgetry.jks.enc -out Gadgetry.jks -d
   - chmod +x gradlew
-
-deploy:
-  provider: releases
-  api_key:
-    secure: HmXD+MrA7HyB7pwLO4VE4ND012Kcqgd57V/z1odJNIiRSx1tXnWduvUVzhQ+HlVopDbfeMolEiHOH/WIDMJlvCwAjo8yl/nWgx8iv6tw/15Z99DZlnpQuzJMMlCHs09FtaVTvfYMU390xA5AVJF3XIW8241SY4tw1PgZprlEHewfnU1zE1eN7WMRMffcbwcmmj1hhuY63zi/0274lMY77+zhCCk44E5ygiWgEp2wSPQozJ/2bGZPqLDqqZMuZBGadQSVRb2L46a45nPByQX9b3GwMhOwGWoZpj67avEOd/sePHVPUa44lWkYRqsqIcPHGkiURu9N9yz2qbNPR/4b3UT8VulTOSYNywJUJu+7Sd9WDhuMTnvI4vOfFfyBVuEE87g/hPFLLKke4QQYh55DFcfr+LewuuLEsLMX3FDdeDF8ot/uneCCTdVffiCodDgdb4a9r/3h/bxNecIziLQi9ydF3CB5fKwqhlVdjEaDewPk5yoPsMzL03wWGBS6BRXzmSRNPglSWE1y9STtRNBan3ZtsvUa4NhzYeWunooB8A83A3jJr5RkiNQ/fNo0p2CdsfAEqnbwTbHK/7VXkj4AmZc+lBXPPOCdHLCHPjjtKxtCj7NjrIVLR0C1s4V9oKunZMZGWZ29tNNtzWjVgmV9xZF1rkMaxz48KKKbRSvsBg0=
-  skip_cleanup: true
-  file: app/build/outputs/apk/release/app-release.apk
-  on:
-    tags: true
-    repo: gggxbbb/tujian_kotlin
-
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
-    - $HOME/.android/build-cache
-
+  - "$HOME/.gradle/caches/"
+  - "$HOME/.gradle/wrapper/"
+  - "$HOME/.android/build-cache"
 notifications:
   email:
-    - 2331490629@qq.com
+  - 2331490629@qq.com
+deploy:
+  provider: releases
+  api_key:
+    secure: k9tbRCiqFedG4mXmTMQIZkNBvO1qnZeXaPpClMrRUXNUtZwAL2EMFSwDHjCYagybAGaSY+031nr9FM+399A7UpB8F/lGJy/SVlhrtLjS+rzAtpPN3A1xF/2U7lN3EopAvQu/tU6sBfvDSr/VlJWlhFmcx9h8fUZINdRGNgUxqxV2IVh9DzQNOE2VvHZ+V3+KWGKo8NGdTHEPFN8HTVO2Kj1Zgqasi+VGtB2rh38Ae91qvoIIpzS8uaOpiewL5gmv2QoGBdA67vJJ9FWc+or3Qtr2kaTtziLKKiwK0pnqKZjmrzur8eGr58Z2140i3CHDcLLISz/yDDSgjIhoLQ7F0oRKy81V9jfWSnfYKmhGEXWVID1pYo2thZz4yupYXWyd/hcd1Lerof3oy5sITZMd2NGx2K+qu2gHiLZR2xKRxFeeBDdhk7Bb0yOU1QqDpjLwIpMaoQCv7gM8aQbx/R6HfadmQlyuQpB2x5HRXz31yBoayNMrsGRVZcrWXQV/snDxHDezoWPDrYhRn23rNgib5mGsvpcBBEkvsYl4peUyS51+ufcCQxT0k+2biVkD/u6RucW3EcIwxAeatY5c2zP59CFstvKQ4/qrl8k1PX0IYm6UbDJxQ92rqddx5dXDUhegDc1h/kE5xL1q0Fa+wwHxrWjLMPcxy+SA7RWgcHkcOKo=
+  skip_cleanup: true
+  file: app/build/outputs/apk/release/app-release.apk
+  on:
+    tags: true
+    repo: gggxbbb/tujian_kotlin
