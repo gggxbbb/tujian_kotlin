@@ -28,10 +28,11 @@ class MainActivity : AppCompatActivity() {
         checkForUpdate(this)
 
         //fab.setOnClickListener {
-            //startActivity(Intent(this, UploadActivity::class.java))
+        //startActivity(Intent(this, UploadActivity::class.java))
         //}
 
-        recManage = StaggeredGridLayoutManager(getColumns(this), StaggeredGridLayoutManager.VERTICAL)
+        recManage =
+            StaggeredGridLayoutManager(getColumns(this), StaggeredGridLayoutManager.VERTICAL)
         main_pics.layoutManager = recManage
 
         onLoading.visibility = View.VISIBLE
@@ -50,7 +51,11 @@ class MainActivity : AppCompatActivity() {
             { _, ioException ->
                 runOnUiThread {
                     val data = sp.getString("today", null)
-                    if (data == null) Snackbar.make(main_pics, "${ioException.message}", Snackbar.LENGTH_LONG).show()
+                    if (data == null) Snackbar.make(
+                        main_pics,
+                        "${ioException.message}",
+                        Snackbar.LENGTH_LONG
+                    ).show()
                     else loadToday(data)
                 }
             })

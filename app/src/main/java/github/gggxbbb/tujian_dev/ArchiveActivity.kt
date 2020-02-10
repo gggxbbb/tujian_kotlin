@@ -20,6 +20,7 @@ class ArchiveActivity : AppCompatActivity() {
     private lateinit var recManage: StaggeredGridLayoutManager
     private lateinit var adapter: PicsAdapter
     private var datas: java.util.ArrayList<TujianPic> = java.util.ArrayList()
+    private var width: Int = 1080
     private var page = 1
     private val size = 15
     private var canLoad = true
@@ -27,13 +28,14 @@ class ArchiveActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        requestedOrientation = if (isPad(this)) ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE else ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        requestedOrientation =
+            if (isPad(this)) ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE else ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
         //fab.setOnClickListener {
-            //startActivity(Intent(this, UploadActivity::class.java))
+        //startActivity(Intent(this, UploadActivity::class.java))
         //}
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -44,7 +46,8 @@ class ArchiveActivity : AppCompatActivity() {
 
         title = tNAME
 
-        recManage = StaggeredGridLayoutManager(getColumns(this), StaggeredGridLayoutManager.VERTICAL)
+        recManage =
+            StaggeredGridLayoutManager(getColumns(this), StaggeredGridLayoutManager.VERTICAL)
         main_pics.layoutManager = recManage
 
         loadPics(page, tID)
@@ -58,8 +61,8 @@ class ArchiveActivity : AppCompatActivity() {
                             page += 1
                             loadPics(page, tID)
                             canLoad = false
-                        }else{
-                            Snackbar.make(fab,R.string.action_wait,Snackbar.LENGTH_SHORT).show()
+                        } else {
+                            Snackbar.make(fab, R.string.action_wait, Snackbar.LENGTH_SHORT).show()
                         }
                     }
                 }

@@ -5,18 +5,34 @@ package github.gggxbbb.tujian_dev.tools
 import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
+import android.util.Log
 import org.json.JSONArray
 import org.json.JSONObject
 
 
-class TujianSort(val TID:String,val TNAME:String)
+class TujianSort(val TID: String, val TNAME: String)
 
-val TujianSortMap=HashMap<String,TujianSort>()
+val TujianSortMap = HashMap<String, TujianSort>()
 
 class TujianPic(private val dataJson: JSONObject) {
 
     private val pContent: String =
         Regex("(?!<= {2})\n").replace(dataJson.getString("p_content"), "  \n")
+
+    private val tNAME: String = if (dataJson.has(("T_NAME"))) {
+        TujianSortMap[getTID()] = TujianSort(getTID(), dataJson.getString("T_NAME"))
+        dataJson.getString("T_NAME")
+    } else {
+        try {
+            TujianSortMap[getTID()]!!.TNAME
+        } catch (e: Exception) {
+            ""
+        }
+    }
+
+    private val pLink: String = "https://s2.images.dailypics.cn${dataJson.getString("nativePath")}"
+
+    private val pLinkLite: String = pLink+"!w1080"
 
     fun getTitle(): String {
         return dataJson.getString("p_title")
@@ -31,11 +47,12 @@ class TujianPic(private val dataJson: JSONObject) {
     }
 
     fun getLink(): String {
-        return dataJson.getString("local_url")
+        Log.d("pic",pLinkLite)
+        return pLinkLite
     }
 
     fun getLinkHD(): String {
-        return getLink() + "?p=0"
+        return pLink
     }
 
     fun getTID(): String {
@@ -43,16 +60,7 @@ class TujianPic(private val dataJson: JSONObject) {
     }
 
     fun getTNAME(): String {
-        return if (dataJson.has(("T_NAME"))){
-            TujianSortMap[getTID()] = TujianSort(getTID(),dataJson.getString("T_NAME"))
-            dataJson.getString("T_NAME")
-        }else{
-            try {
-                TujianSortMap[getTID()]!!.TNAME
-            }catch (e:Exception){
-                ""
-            }
-        }
+        return tNAME
     }
 
     fun getPID(): String {

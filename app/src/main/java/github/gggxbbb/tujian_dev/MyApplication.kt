@@ -9,6 +9,7 @@ class MyApplication : Application() {
 
     override fun onCreate() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+
         super.onCreate()
     }
 
