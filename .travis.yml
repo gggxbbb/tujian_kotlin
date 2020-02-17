@@ -32,5 +32,4 @@ deploy:
   skip_cleanup: true
   file: app/build/outputs/apk/release/app-release.apk
   on:
-    tags: true
     repo: gggxbbb/tujian_kotlin
