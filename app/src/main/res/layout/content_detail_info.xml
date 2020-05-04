@@ -38,7 +38,6 @@
                 android:id="@+id/pic_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autoLink="all"
                 android:background="@color/background"
                 android:textColor="@color/text_color"
                 android:textColorLink="@color/text_color"
