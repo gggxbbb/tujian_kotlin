@@ -35,3 +35,4 @@ deploy:
   file: app/build/outputs/apk/release/app-release.apk
   on:
     repo: gggxbbb/tujian_kotlin
+    tag: true
