@@ -5,8 +5,8 @@ android:
   - tools
   - platform-tools
   - tools
-  - build-tools-30
-  - android-30
+  - build-tools-R
+  - android-R
   - extra
 script:
   - "./gradlew :app:assembleRelease"
