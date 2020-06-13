@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "github.gggxbbb.tujian_dev"
         minSdkVersion 21
-        targetSdkVersion "R"
+        targetSdkVersion 30
         versionCode 10
         versionName "1.0.4.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
