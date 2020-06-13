@@ -145,7 +145,8 @@
                     android:textColor="@color/text_color"/>
         </LinearLayout>
 
-        <LinearLayout
+	<LinearLayout
+		android:visibility="gone"
                 android:id="@+id/show_copy_link"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -169,7 +170,8 @@
                     android:textColor="@color/text_color"/>
         </LinearLayout>
 
-        <LinearLayout
+	<LinearLayout
+		android:visibility="gone"
                 android:id="@+id/show_browser"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
