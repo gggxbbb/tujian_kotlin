@@ -5,7 +5,7 @@ android:
   - tools
   - platform-tools
   - tools
-  - build-tools-30.0.0-rc2
+  - build-tools-30.0.0-rc1
   - android-R
   - extra
 script:
