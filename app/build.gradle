@@ -5,7 +5,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 'android-R'
     defaultConfig {
         applicationId "github.gggxbbb.tujian_dev"
         minSdkVersion 21
