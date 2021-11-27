@@ -2,15 +2,18 @@
 
 package github.gggxbbb.tujian_dev
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.WallpaperManager
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
 import android.view.MenuItem
@@ -18,6 +21,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
+import androidx.core.graphics.drawable.toBitmap
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import coil.Coil
+import coil.load
+import coil.request.ImageRequest
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -26,14 +34,17 @@ import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.snackbar.Snackbar
-import com.zzhoujay.richtext.RichText
+//import com.zzhoujay.richtext.RichText
 import github.gggxbbb.tujian_dev.tools.TujianPic
+import github.gggxbbb.tujian_dev.tools.getColumns
 import github.gggxbbb.tujian_dev.tools.getLink
 import github.gggxbbb.tujian_dev.tools.isPad
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.content_detail.*
 import kotlinx.android.synthetic.main.content_detail_info.*
 import kotlinx.android.synthetic.main.content_detail_pic.*
+import kotlinx.android.synthetic.main.content_detail_pic.onLoading
+import kotlinx.android.synthetic.main.content_main.*
 import org.json.JSONObject
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
@@ -48,9 +59,6 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        requestedOrientation =
-            if (isPad(this)) ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE else ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-
         setContentView(R.layout.activity_detail)
         setSupportActionBar(toolbar)
 
@@ -59,37 +67,26 @@ class DetailActivity : AppCompatActivity() {
         @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
         tujianPic = TujianPic(JSONObject(intent.getStringExtra("pic")))
 
-        Glide.with(this).load(tujianPic.getLinkHD()).listener(object : RequestListener<Drawable> {
-            override fun onLoadFailed(
-                e: GlideException?,
-                model: Any?,
-                target: Target<Drawable>?,
-                isFirstResource: Boolean
-            ): Boolean {
-                onLoading.visibility = View.GONE
-                info_text.text = e?.message
-                return false
-            }
+        pic.load(tujianPic.getLink()) {
+            crossfade(true)
+            listener(onStart = {
+                onLoading.visibility = View.VISIBLE
+            },
+                onSuccess = { _, _ ->
+                    onLoading.visibility = View.GONE
 
-            override fun onResourceReady(
-                resource: Drawable?,
-                model: Any?,
-                target: Target<Drawable>?,
-                dataSource: DataSource?,
-                isFirstResource: Boolean
-            ): Boolean {
-                onLoading.visibility = View.GONE
-                info_text.visibility = View.GONE
+                    val params: ViewGroup.LayoutParams = pic.layoutParams
+                    params.height = pic.width * tujianPic.getHeight() / tujianPic.getWidth()
+                    pic.layoutParams = params
 
-                val params: ViewGroup.LayoutParams = pic.layoutParams
-                params.height = pic.width * tujianPic.getHeight() / tujianPic.getWidth()
-                pic.layoutParams = params
-
-                return false
-            }
-        }).into(pic)
+                },
+                onError = { _, e ->
+                    onLoading.visibility = View.GONE
+                    info_text.text = e.message
+                })
+        }
         //pic_content.text = tujianPic.getContent()
-        RichText.fromMarkdown(tujianPic.getContent()).into(pic_content)
+        //RichText.fromMarkdown(tujianPic.getContent()).into(pic_content)
         pic_title.text = tujianPic.getTitle()
         pic_info.text = String.format(
             "%s %s %s×%s @ %s",
@@ -110,6 +107,10 @@ class DetailActivity : AppCompatActivity() {
         show_archive.setOnClickListener {
             //开归档
             val i = Intent(this, ArchiveActivity::class.java)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                i.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT)
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
             i.putExtra("pic", tujianPic.getString())
             startActivity(i)
         }
@@ -141,12 +142,15 @@ class DetailActivity : AppCompatActivity() {
             val uri = Uri.parse(getLink(tujianPic))
             val builder = CustomTabsIntent.Builder()
             val tab = builder.build()
-            tab.launchUrl(this,uri)
+            tab.launchUrl(this, uri)
         }
         show_share.setOnClickListener {
             //分享
             val i = Intent(Intent.ACTION_SEND)
-            i.putExtra(Intent.EXTRA_TEXT, "《${tujianPic.getTitle()}》\n${tujianPic.getContent()}\n${getLink(tujianPic)}")
+            i.putExtra(
+                Intent.EXTRA_TEXT,
+                "《${tujianPic.getTitle()}》\n${tujianPic.getContent()}\n${getLink(tujianPic)}"
+            )
             i.type = "text/plain"
             startActivity(Intent.createChooser(i, getString(R.string.title_share)))
         }
@@ -169,42 +173,90 @@ class DetailActivity : AppCompatActivity() {
         return true
     }
 
+    @SuppressLint("MissingPermission")
     private fun setPic(tujianPic: TujianPic, view: View) {
-        Glide.with(this).asBitmap().load(tujianPic.getLinkHD()).into(object : SimpleTarget<Bitmap>() {
-            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                val wallpaperManager = WallpaperManager.getInstance(this@DetailActivity)
-                try {
-                    wallpaperManager.setBitmap(resource)
-                    Snackbar.make(view, R.string.action_set_finish, Snackbar.LENGTH_LONG).show()
-                } catch (e: IOException) {
-                    Snackbar.make(view, Objects.requireNonNull<String>(e.message), Snackbar.LENGTH_LONG).show()
-                }
+        Coil.enqueue(
+            ImageRequest.Builder(this)
+                .data(Uri.parse(tujianPic.getLinkHD()))
+                .target(
+                    onSuccess = {
+                        val wallpaperManager = WallpaperManager.getInstance(this@DetailActivity)
+                        try {
+                            wallpaperManager.setBitmap(it.toBitmap())
+                            Snackbar.make(view, R.string.action_set_finish, Snackbar.LENGTH_LONG)
+                                .show()
+                        } catch (e: IOException) {
+                            Snackbar.make(
+                                view,
+                                Objects.requireNonNull<String>(e.message),
+                                Snackbar.LENGTH_LONG
+                            ).show()
+                        }
+                    }
+                )
+                .listener(
+                    onError = { _, e ->
+                        Snackbar.make(
+                            view,
+                            Objects.requireNonNull<String>(e.message),
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+                )
+                .build()
+        )
 
-            }
-        })
     }
 
+    @SuppressLint("MissingPermission")
     private fun downloadPic(tujianPic: TujianPic, view: View, uri: Uri) {
-        Glide.with(this).asBitmap().load(tujianPic.getLinkHD()).into(object : SimpleTarget<Bitmap>() {
-            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                try {
-                    val pfd: ParcelFileDescriptor? = contentResolver.openFileDescriptor(uri, "w")
-                    val fileOutputStream = FileOutputStream(pfd?.fileDescriptor!!)
-                    resource.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
-                    fileOutputStream.close()
-                    pfd.close()
-                    Snackbar.make(view, R.string.action_download_finish, Snackbar.LENGTH_LONG).show()
-                } catch (e: FileNotFoundException) {
-                    e.printStackTrace()
-                    Snackbar.make(view, R.string.action_download_failed, Snackbar.LENGTH_LONG).show()
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                    Snackbar.make(view, R.string.action_download_failed, Snackbar.LENGTH_LONG).show()
-                }
-            }
-        })
+        Coil.enqueue(
+            ImageRequest.Builder(this)
+                .data(Uri.parse(tujianPic.getLinkHD()))
+                .target(
+                    onSuccess = {
+                        val wallpaperManager = WallpaperManager.getInstance(this@DetailActivity)
+                        try {
+                            val pfd: ParcelFileDescriptor? =
+                                contentResolver.openFileDescriptor(uri, "w")
+                            val fileOutputStream = FileOutputStream(pfd?.fileDescriptor!!)
+                            it.toBitmap().compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
+                            fileOutputStream.close()
+                            pfd.close()
+                            Snackbar.make(view, R.string.action_download_finish, Snackbar.LENGTH_LONG)
+                                .show()
+                        } catch (e: IOException) {
+                            Snackbar.make(
+                                view,
+                                Objects.requireNonNull<String>(e.message),
+                                Snackbar.LENGTH_LONG
+                            ).show()
+                        }
+                    }
+                )
+                .listener(
+                    onError = { _, e ->
+                        Snackbar.make(
+                            view,
+                            Objects.requireNonNull<String>(e.message),
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+                )
+                .build()
+        )
+
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+        }
+
+        super.onConfigurationChanged(newConfig)
+    }
 }
 
 

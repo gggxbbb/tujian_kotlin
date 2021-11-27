@@ -2,6 +2,7 @@ package github.gggxbbb.tujian_dev
 
 import android.content.Context
 import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -19,13 +20,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        requestedOrientation =
-            if (isPad(this)) ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE else ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        checkForUpdate(this)
+        //checkForUpdate(this)
 
         //fab.setOnClickListener {
         //startActivity(Intent(this, UploadActivity::class.java))
@@ -59,7 +57,6 @@ class MainActivity : AppCompatActivity() {
                     else loadToday(data)
                 }
             })
-
     }
 
     private fun loadToday(data: String) {
@@ -69,6 +66,20 @@ class MainActivity : AppCompatActivity() {
             main_pics.adapter = adapter
             onLoading.visibility = View.GONE
         }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+        }
+
+        recManage =
+            StaggeredGridLayoutManager(getColumns(this), StaggeredGridLayoutManager.VERTICAL)
+        main_pics.layoutManager = recManage
+
+        super.onConfigurationChanged(newConfig)
     }
 
 }

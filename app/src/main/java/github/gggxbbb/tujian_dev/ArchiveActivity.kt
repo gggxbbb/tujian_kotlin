@@ -2,10 +2,12 @@ package github.gggxbbb.tujian_dev
 
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -17,7 +19,7 @@ import org.json.JSONObject
 
 class ArchiveActivity : AppCompatActivity() {
 
-    private lateinit var recManage: StaggeredGridLayoutManager
+    private lateinit var recManage: GridLayoutManager
     private lateinit var adapter: PicsAdapter
     private var datas: java.util.ArrayList<TujianPic> = java.util.ArrayList()
     private var width: Int = 1080
@@ -27,9 +29,6 @@ class ArchiveActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        requestedOrientation =
-            if (isPad(this)) ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE else ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
@@ -47,7 +46,7 @@ class ArchiveActivity : AppCompatActivity() {
         title = tNAME
 
         recManage =
-            StaggeredGridLayoutManager(getColumns(this), StaggeredGridLayoutManager.VERTICAL)
+            GridLayoutManager(this, getColumns(this), RecyclerView.VERTICAL, false)
         main_pics.layoutManager = recManage
 
         loadPics(page, tID)
@@ -72,6 +71,7 @@ class ArchiveActivity : AppCompatActivity() {
         main_pics.addOnScrollListener(OnScroll())
 
         adapter = PicsAdapter(datas, this)
+
         main_pics.adapter = adapter
     }
 
@@ -107,6 +107,19 @@ class ArchiveActivity : AppCompatActivity() {
                 }
             })
 
+    }
+
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+        }
+
+        main_pics.layoutManager = GridLayoutManager(this, getColumns(this), RecyclerView.VERTICAL, false)
+
+        super.onConfigurationChanged(newConfig)
     }
 
 }

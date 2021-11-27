@@ -4,10 +4,12 @@
           package="github.gggxbbb.tujian_dev">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.SET_WALLPAPER"/>
+
+    <uses-permission android:name="android.permission.SET_WALLPAPER" />
 
     <application
             android:name=".MyApplication"
+            android:resizeableActivity="true"
             android:allowBackup="true"
             android:allowTaskReparenting="true"
             android:icon="@mipmap/ic_launcher"
@@ -15,12 +17,17 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
-            tools:ignore="AllowBackup">
+            tools:ignore="AllowBackup"
+            tools:targetApi="n">
+
+        <meta-data android:name="android.allow_multiple_resumed_activities" android:value="true" />
+
         <activity
                 android:name=".BridgeActivity"
                 android:enabled="true"
                 android:exported="true"
                 android:launchMode="singleTop"
+                android:configChanges="screenSize|orientation|smallestScreenSize|screenLayout"
                 android:taskAffinity="">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
@@ -42,18 +49,21 @@
                 android:name=".ArchiveActivity"
                 android:label="@string/title_activity_archive"
                 android:parentActivityName=".DetailActivity"
+                android:configChanges="screenSize|orientation|smallestScreenSize|screenLayout"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
                 android:name=".DetailActivity"
                 android:label="@string/title_activity_detail"
                 android:parentActivityName=".MainActivity"
+                android:configChanges="screenSize|orientation|smallestScreenSize|screenLayout"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
                 android:name=".MainActivity"
-                android:label="@string/app_name"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:theme="@style/AppTheme.NoActionBar"
+                android:configChanges="screenSize|orientation|smallestScreenSize|screenLayout"
+                android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="android.intent.action.VIEW"/>

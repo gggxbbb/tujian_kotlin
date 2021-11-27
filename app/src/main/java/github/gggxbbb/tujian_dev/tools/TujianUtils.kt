@@ -2,10 +2,13 @@
 
 package github.gggxbbb.tujian_dev.tools
 
+import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Color
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -115,10 +118,21 @@ fun isPad(context: Context): Boolean {
     return context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK >= Configuration.SCREENLAYOUT_SIZE_LARGE
 }
 
-fun getColumns(context: Context): Int {
-    return if (isPad(context)) 2
-    else 1
+fun getColumns(activity: Activity): Int {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+
+        val display = activity.display
+        val columns = display!!.width *2 / display.height - 1
+        return if (columns < 1) 1 else columns
+    } else {
+        return if (isPad(activity)) {
+            2
+        } else {
+            1
+        }
+    }
 }
+
 
 fun getLink(pic: TujianPic): String {
     return "https://www.dailypics.cn/member/id/${pic.getPID()}"
