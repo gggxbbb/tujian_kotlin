@@ -35,7 +35,7 @@ class TujianPic(private val dataJson: JSONObject) {
 
     private val pLink: String = "https://s2.images.dailypics.cn${dataJson.getString("nativePath")}"
 
-    private val pLinkLite: String = pLink+"!w1080"
+    private val pLinkLite: String = pLink + "!w1080"
 
     fun getTitle(): String {
         return dataJson.getString("p_title")
@@ -50,7 +50,7 @@ class TujianPic(private val dataJson: JSONObject) {
     }
 
     fun getLink(): String {
-        Log.d("pic",pLinkLite)
+        Log.d("pic", pLinkLite)
         return pLinkLite
     }
 
@@ -121,14 +121,18 @@ fun isPad(context: Context): Boolean {
 fun getColumns(activity: Activity): Int {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
         val display = activity.display
-        if (activity.isInMultiWindowMode){
+        if (activity.isInMultiWindowMode) {
             return display!!.width / 1500
         }
-        val columns = display!!.width *2 / display.height - 1
+        val columns = display!!.width * 2 / display.height - 1
         if (columns < 1) 1 else columns
     } else {
-        if (isPad(activity)) {
-            2
+        if (activity.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            if (!isPad(activity)){
+                2
+            } else {
+                1
+            }
         } else {
             1
         }

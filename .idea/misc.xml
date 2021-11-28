@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/gggxbbb/StudioProjects/tujian_kotlin/app/src/main/res/layout-sw600dp/content_detail.xml" value="0.19605967865340473" />
+        <entry key="..\:/Users/gggxbbb/StudioProjects/tujian_kotlin/app/src/main/res/layout/activity_bridge.xml" value="0.5380208333333333" />
+        <entry key="..\:/Users/gggxbbb/StudioProjects/tujian_kotlin/app/src/main/res/layout/activity_detail.xml" value="0.5380208333333333" />
+        <entry key="..\:/Users/gggxbbb/StudioProjects/tujian_kotlin/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/gggxbbb/StudioProjects/tujian_kotlin/app/src/main/res/layout/activity_main_item.xml" value="0.33061594202898553" />
         <entry key="..\:/Users/gggxbbb/StudioProjects/tujian_kotlin/app/src/main/res/layout/content_detail.xml" value="0.25962512664640325" />
         <entry key="..\:/Users/gggxbbb/StudioProjects/tujian_kotlin/app/src/main/res/layout/content_main.xml" value="0.26969416126042633" />
       </map>

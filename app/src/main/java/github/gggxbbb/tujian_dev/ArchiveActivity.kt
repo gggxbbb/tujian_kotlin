@@ -65,7 +65,7 @@ class ArchiveActivity : AppCompatActivity() {
                             loadPics(page, tID)
                             canLoad = false
                         } else {
-                            Snackbar.make(fab, R.string.action_wait, Snackbar.LENGTH_SHORT).show()
+                            Snackbar.make(main_pics, R.string.action_wait, Snackbar.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -90,7 +90,7 @@ class ArchiveActivity : AppCompatActivity() {
     fun loadPics(page_get: Int, tID: String) {
         Log.d("loadPics", "page: $page_get")
 
-        Snackbar.make(fab, R.string.action_loading, Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(main_pics, R.string.action_loading, Snackbar.LENGTH_SHORT).show()
 
         Http.get("https://v2.api.dailypics.cn/list/?page=$page_get&size=$size&sort=$tID",
             { _, response ->
@@ -108,7 +108,7 @@ class ArchiveActivity : AppCompatActivity() {
             { _, ioException ->
                 runOnUiThread {
                     page -= 1
-                    Snackbar.make(fab, "${ioException.message}", Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(main_pics, "${ioException.message}", Snackbar.LENGTH_LONG).show()
                     canLoad = true
                 }
             })

@@ -10,14 +10,21 @@
     <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
+                android:overScrollMode="ifContentScrolls"
+                android:theme="@style/AppTheme.NoActionBar"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:title="@string/app_name"
+                app:titleTextAppearance="@style/AppTheme.NoActionBar"
+                app:titleTextColor="@color/text_color"
+                app:layout_scrollFlags="scroll"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         main_pics.layoutManager = recManage
 
         onLoading.visibility = View.VISIBLE
-        Snackbar.make(fab, R.string.action_loading, Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(main_pics, R.string.action_loading, Snackbar.LENGTH_SHORT).show()
 
         val sp = getSharedPreferences("catch", Context.MODE_PRIVATE)
 
