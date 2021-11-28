@@ -68,12 +68,13 @@ class PicsAdapter(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 intent.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                intent.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
             }
             intent.putExtra("pic", tujianPic.getString())
             activity.startActivity(intent)
         }
 
-        stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+        stateRestorationPolicy = StateRestorationPolicy.PREVENT_WHEN_EMPTY
 
     }
 

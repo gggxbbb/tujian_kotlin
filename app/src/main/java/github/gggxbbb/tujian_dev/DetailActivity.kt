@@ -11,7 +11,6 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -22,23 +21,13 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.graphics.drawable.toBitmap
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import coil.Coil
 import coil.load
 import coil.request.ImageRequest
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.SimpleTarget
-import com.bumptech.glide.request.target.Target
-import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.snackbar.Snackbar
 //import com.zzhoujay.richtext.RichText
 import github.gggxbbb.tujian_dev.tools.TujianPic
-import github.gggxbbb.tujian_dev.tools.getColumns
 import github.gggxbbb.tujian_dev.tools.getLink
-import github.gggxbbb.tujian_dev.tools.isPad
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.content_detail.*
 import kotlinx.android.synthetic.main.content_detail_info.*
@@ -56,9 +45,7 @@ class DetailActivity : AppCompatActivity() {
     private val code = 52
     private lateinit var tujianPic: TujianPic
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+    private fun initView() {
         setContentView(R.layout.activity_detail)
         setSupportActionBar(toolbar)
 
@@ -74,6 +61,7 @@ class DetailActivity : AppCompatActivity() {
             },
                 onSuccess = { _, _ ->
                     onLoading.visibility = View.GONE
+                    info_text.visibility = View.GONE
 
                     val params: ViewGroup.LayoutParams = pic.layoutParams
                     params.height = pic.width * tujianPic.getHeight() / tujianPic.getWidth()
@@ -110,6 +98,7 @@ class DetailActivity : AppCompatActivity() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 i.addFlags(Intent.FLAG_ACTIVITY_LAUNCH_ADJACENT)
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                i.addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
             }
             i.putExtra("pic", tujianPic.getString())
             startActivity(i)
@@ -154,6 +143,12 @@ class DetailActivity : AppCompatActivity() {
             i.type = "text/plain"
             startActivity(Intent.createChooser(i, getString(R.string.title_share)))
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        initView()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -220,10 +215,15 @@ class DetailActivity : AppCompatActivity() {
                             val pfd: ParcelFileDescriptor? =
                                 contentResolver.openFileDescriptor(uri, "w")
                             val fileOutputStream = FileOutputStream(pfd?.fileDescriptor!!)
-                            it.toBitmap().compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
+                            it.toBitmap()
+                                .compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream)
                             fileOutputStream.close()
                             pfd.close()
-                            Snackbar.make(view, R.string.action_download_finish, Snackbar.LENGTH_LONG)
+                            Snackbar.make(
+                                view,
+                                R.string.action_download_finish,
+                                Snackbar.LENGTH_LONG
+                            )
                                 .show()
                         } catch (e: IOException) {
                             Snackbar.make(
@@ -249,11 +249,13 @@ class DetailActivity : AppCompatActivity() {
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+        requestedOrientation = if (newConfig.screenWidthDp > newConfig.screenHeightDp) {
+            ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+        } else {
+            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         }
+
+        initView()
 
         super.onConfigurationChanged(newConfig)
     }

@@ -75,9 +75,7 @@ class MainActivity : AppCompatActivity() {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         }
 
-        recManage =
-            StaggeredGridLayoutManager(getColumns(this), StaggeredGridLayoutManager.VERTICAL)
-        main_pics.layoutManager = recManage
+        recManage.spanCount = getColumns(this)
 
         super.onConfigurationChanged(newConfig)
     }

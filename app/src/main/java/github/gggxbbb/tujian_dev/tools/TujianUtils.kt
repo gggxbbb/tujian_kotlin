@@ -119,13 +119,15 @@ fun isPad(context: Context): Boolean {
 }
 
 fun getColumns(activity: Activity): Int {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
         val display = activity.display
+        if (activity.isInMultiWindowMode){
+            return display!!.width / 1500
+        }
         val columns = display!!.width *2 / display.height - 1
-        return if (columns < 1) 1 else columns
+        if (columns < 1) 1 else columns
     } else {
-        return if (isPad(activity)) {
+        if (isPad(activity)) {
             2
         } else {
             1

@@ -50,6 +50,7 @@
                 android:label="@string/title_activity_archive"
                 android:parentActivityName=".DetailActivity"
                 android:configChanges="screenSize|orientation|smallestScreenSize|screenLayout"
+                android:launchMode="singleInstancePerTask"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
@@ -57,6 +58,7 @@
                 android:label="@string/title_activity_detail"
                 android:parentActivityName=".MainActivity"
                 android:configChanges="screenSize|orientation|smallestScreenSize|screenLayout"
+                android:launchMode="singleInstancePerTask"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity

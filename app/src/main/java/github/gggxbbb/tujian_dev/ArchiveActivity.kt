@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -16,16 +17,17 @@ import github.gggxbbb.tujian_dev.tools.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import org.json.JSONObject
+import kotlin.properties.Delegates
 
 class ArchiveActivity : AppCompatActivity() {
 
     private lateinit var recManage: GridLayoutManager
     private lateinit var adapter: PicsAdapter
     private var datas: java.util.ArrayList<TujianPic> = java.util.ArrayList()
-    private var width: Int = 1080
     private var page = 1
     private val size = 15
     private var canLoad = true
+    private var columns = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,8 +47,10 @@ class ArchiveActivity : AppCompatActivity() {
 
         title = tNAME
 
+        columns = getColumns(this)
+
         recManage =
-            GridLayoutManager(this, getColumns(this), RecyclerView.VERTICAL, false)
+            GridLayoutManager(this, columns, RecyclerView.VERTICAL, false)
         main_pics.layoutManager = recManage
 
         loadPics(page, tID)
@@ -84,6 +88,8 @@ class ArchiveActivity : AppCompatActivity() {
     }
 
     fun loadPics(page_get: Int, tID: String) {
+        Log.d("loadPics", "page: $page_get")
+
         Snackbar.make(fab, R.string.action_loading, Snackbar.LENGTH_SHORT).show()
 
         Http.get("https://v2.api.dailypics.cn/list/?page=$page_get&size=$size&sort=$tID",
@@ -117,7 +123,7 @@ class ArchiveActivity : AppCompatActivity() {
             requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
         }
 
-        main_pics.layoutManager = GridLayoutManager(this, getColumns(this), RecyclerView.VERTICAL, false)
+        recManage.spanCount = getColumns(this)
 
         super.onConfigurationChanged(newConfig)
     }
