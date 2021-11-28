@@ -16,7 +16,7 @@
             android:baselineAligned="false"
             android:orientation="horizontal">
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
                 android:id="@+id/pic_root"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -24,9 +24,9 @@
 
             <include layout="@layout/content_detail_pic" />
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
                 android:id="@+id/info_root"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -36,7 +36,7 @@
                     layout="@layout/content_detail_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
 

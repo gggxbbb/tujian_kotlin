@@ -249,11 +249,6 @@ class DetailActivity : AppCompatActivity() {
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
-        requestedOrientation = if (newConfig.screenWidthDp > newConfig.screenHeightDp) {
-            ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-        } else {
-            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        }
 
         initView()
 
